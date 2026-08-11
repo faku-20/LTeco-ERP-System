@@ -71,7 +71,7 @@ final class InitialAutoReplyBuilder
         }
 
         return [
-            'body' => 'Hola, gracias por escribir a Ltecobike. Recibimos tu mensaje y te derivamos con un miembro del equipo para que pueda ayudarte.',
+            'body' => 'Hola, gracias por escribir a ERP. Recibimos tu mensaje y te derivamos con un miembro del equipo para que pueda ayudarte.',
             'media' => [],
             'final_body' => null,
         ];

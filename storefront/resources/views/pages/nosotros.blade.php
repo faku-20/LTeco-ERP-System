@@ -1,10 +1,10 @@
 @extends('layouts.storefront-public')
 
-@section('title', 'Nosotros | CommerceOps')
+@section('title', 'Nosotros | ERP')
 
 @section(
     'description',
-    'Conocé CommerceOps, venta y servicio de bici-motos y scooters eléctricos en Montevideo, Uruguay.'
+    'Conocé ERP, venta y servicio de bici-motos y scooters eléctricos en Montevideo, Uruguay.'
 )
 
 @section('content')
@@ -21,10 +21,10 @@
         >
             <div class="phase1-container">
                 <p class="phase1-eyebrow">
-                    CommerceOps Uruguay
+                    ERP Uruguay
                 </p>
 
-                <h1>Sobre CommerceOps</h1>
+                <h1>Sobre ERP</h1>
 
                 <p class="phase1-lead">
                     Una propuesta enfocada en movilidad eléctrica
@@ -54,7 +54,7 @@
 
                 <div class="institutional-story__copy">
                     <p>
-                        Desde CommerceOps apostamos a la movilidad
+                        Desde ERP apostamos a la movilidad
                         eléctrica como un medio de apoyo a nuestro
                         ecosistema en la no emisión de gases.
                     </p>
@@ -165,7 +165,7 @@
                     href="{{ $contact['whatsapp_url'] }}?text={{
                         rawurlencode(
                             'Hola, quiero conocer los modelos '
-                            . 'disponibles de CommerceOps.'
+                            . 'disponibles de ERP.'
                         )
                     }}"
                     target="_blank"

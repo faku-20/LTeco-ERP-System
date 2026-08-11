@@ -23,7 +23,7 @@ final class ModeloDetallePageTest extends TestCase
             ->assertSee(
                 '<title>'
                 . $name
-                . ' | CommerceOps</title>',
+                . ' | ERP</title>',
                 false,
             )
             ->assertSee($name)

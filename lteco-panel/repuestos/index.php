@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Repuestos | Lteco";
+$pageTitle = "Repuestos | ERP";
 require_once __DIR__ . "/../includes/db.php";
 require_once __DIR__ . "/../includes/auth.php";
 require_once __DIR__ . '/../includes/flash.php';
@@ -92,7 +92,7 @@ require_once __DIR__ . "/../includes/sidebar.php";
             <h1><?= $esDistribuidor ? 'Catálogo mayorista' : 'Repuestos' ?></h1>
             <p class="subtle">
                 <?= $esDistribuidor
-                    ? 'Repuestos disponibles con precio distribuidor. Armá el pedido y envialo a Ltecobike.'
+                    ? 'Repuestos disponibles con precio distribuidor. Armá el pedido y envialo a ERP.'
                     : 'Catálogo de repuestos con stock, costos y precios de venta.' ?>
             </p>
             <?php if ($esDistribuidor && $distribuidorActual): ?>
@@ -200,7 +200,7 @@ require_once __DIR__ . "/../includes/sidebar.php";
             <?php else: ?>
                 <div class="empty-v4">
                     <h2>No hay repuestos disponibles</h2>
-                    <p>Probá cambiar la búsqueda o consultá con Ltecobike.</p>
+                    <p>Probá cambiar la búsqueda o consultá con ERP.</p>
                 </div>
             <?php endif; ?>
         </section>

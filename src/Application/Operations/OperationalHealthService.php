@@ -98,7 +98,7 @@ final class OperationalHealthService
             return false;
         }
 
-        $message = "<b>Ltecobike alerta operacional</b>\n"
+        $message = "<b>ERP alerta operacional</b>\n"
             . 'Estado: problemático' . "\n"
             . 'Checks: ' . $this->sanitizeMessage(implode(', ', $problemKeys));
 

@@ -1,4 +1,4 @@
-# Guía de setup — Ltecobike
+# Guía de setup — LTeco ERP System
 
 Stack: PHP legacy + servicios por capas, Laravel, MySQL/MariaDB, Apache, Nginx y Docker.
 Entornos: `local`, `staging` y `production`.
@@ -212,7 +212,7 @@ Cada página es un archivo PHP autónomo. El patrón estándar al inicio del arc
 
 ```php
 <?php
-$pageTitle = "Mi módulo | Ltecobike";
+$pageTitle = "Mi módulo | LTeco ERP System";
 
 require_once __DIR__ . "/../includes/db.php";    // crea $pdo
 require_once __DIR__ . "/../includes/auth.php";  // inicia sesión
@@ -324,7 +324,7 @@ tail -f storage/logs/php-error.log
 | `LTECO_MAIL_USER` | — | Usuario SMTP |
 | `LTECO_MAIL_PASS` | — | Contraseña o app password SMTP |
 | `LTECO_MAIL_FROM` | — | Remitente email |
-| `LTECO_MAIL_NAME` | `Ltecobike` | Nombre visible del remitente |
+| `LTECO_MAIL_NAME` | `LTeco ERP System` | Nombre visible del remitente |
 | `LTECO_MAIL_TO` | — | Destinatario de pruebas/notificaciones internas |
 | `LTECO_WEB_SALES_NOTIFY_EMAILS` | `LTECO_MAIL_TO` | Emails internos que reciben aviso de nueva compra web; separar varios con coma |
 | `LTECO_WEB_SALES_NOTIFY_WHATSAPP` | — | Teléfonos internos que reciben WhatsApp por nueva compra web; separar varios con coma |

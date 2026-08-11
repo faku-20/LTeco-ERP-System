@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Pedidos pendientes | Lteco";
+$pageTitle = "Pedidos pendientes | ERP";
 require_once __DIR__ . "/_common.php";
 
 requiereAdmin();
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo->commit();
 
         $nombreProducto = distribuidorItemLabel($pedido);
-        $mensajeWa = "Ltecobike: pedido #{$idPedido} {$nuevoEstado}.\nProducto: {$nombreProducto} · Cantidad: {$pedido['Cantidad']}.";
+        $mensajeWa = "ERP: pedido #{$idPedido} {$nuevoEstado}.\nProducto: {$nombreProducto} · Cantidad: {$pedido['Cantidad']}.";
         $whatsappLinkPost = distribuidorWhatsappNotificar($pdo, (int)$pedido['IdDistribuidor'], $mensajeWa);
 
         $textoFlash = 'Pedido #' . $idPedido . ' ' . $nuevoEstado . ' correctamente.';

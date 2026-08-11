@@ -413,7 +413,7 @@ function aiPanelAnswer(PDO $pdo, string $scope, string $question): string
     $usuario = usuarioActual();
 
     $system = implode("\n", [
-        'Sos el asistente interno del panel Ltecobike.',
+        'Sos el asistente interno del panel ERP.',
         'Usá solo el contexto provisto. Si falta un dato, decilo claramente.',
         'No inventes ventas, gastos, clientes, precios, márgenes, reservas, descuentos ni stock.',
         'No confirmes operaciones críticas. El usuario humano decide.',
@@ -497,7 +497,7 @@ function aiClassifyInbox(PDO $pdo, int $idInbox): array
     );
 
     $system = implode("\n", [
-        'Clasificá mensajes entrantes de WhatsApp o Instagram para Ltecobike.',
+        'Clasificá mensajes entrantes de WhatsApp o Instagram para ERP.',
         'Devolvé solo JSON válido, sin markdown.',
         'Campos: intent, priority, summary, suggested_reply.',
         'intent: consulta_compra, precio, reserva, financiacion, postventa, reclamo, repuesto, saludo, spam u otro.',

@@ -1,10 +1,10 @@
 @extends('layouts.storefront-public')
-@section('title', 'Contacto | CommerceOps')
-@section('description', 'Contactá a CommerceOps en Uruguay por WhatsApp o Instagram. Consultá motos eléctricas, disponibilidad, visitas coordinadas y postventa.')
+@section('title', 'Contacto | ERP')
+@section('description', 'Contactá a ERP en Uruguay por WhatsApp o Instagram. Consultá motos eléctricas, disponibilidad, visitas coordinadas y postventa.')
 @section('content')
 @php
     $contact = config('storefront_content.contact');
-    $whatsappConsultation = $contact['whatsapp_url'].'?text='.rawurlencode('Hola, quiero consultar por los modelos de CommerceOps.');
+    $whatsappConsultation = $contact['whatsapp_url'].'?text='.rawurlencode('Hola, quiero consultar por los modelos de ERP.');
 @endphp
 <div class="contact-page">
     <section class="phase1-page-hero contact-page__hero">
@@ -17,7 +17,7 @@
     <section class="contact-page__channels">
         <div class="official-container contact-channel-grid">
             <a class="contact-channel-card contact-channel-card--primary" href="{{ $whatsappConsultation }}" target="_blank" rel="noopener noreferrer"><x-icon name="whatsapp" :size="28" /><span class="contact-channel-card__label">WhatsApp</span><strong>{{ $contact['whatsapp_display'] }}</strong><p>Consultá modelos, precios, colores y disponibilidad.</p><span class="contact-channel-card__action">Iniciar conversación <x-icon name="arrow-right" :size="16" /></span></a>
-            <a class="contact-channel-card" href="{{ $contact['instagram_url'] }}" target="_blank" rel="noopener noreferrer"><x-icon name="instagram" :size="28" /><span class="contact-channel-card__label">Instagram</span><strong>{{ $contact['instagram_label'] }}</strong><p>Conocé novedades, fotografías y contenido de CommerceOps.</p><span class="contact-channel-card__action">Ver Instagram <x-icon name="arrow-right" :size="16" /></span></a>
+            <a class="contact-channel-card" href="{{ $contact['instagram_url'] }}" target="_blank" rel="noopener noreferrer"><x-icon name="instagram" :size="28" /><span class="contact-channel-card__label">Instagram</span><strong>{{ $contact['instagram_label'] }}</strong><p>Conocé novedades, fotografías y contenido de ERP.</p><span class="contact-channel-card__action">Ver Instagram <x-icon name="arrow-right" :size="16" /></span></a>
             <article class="contact-channel-card"><x-icon name="location" :size="28" /><span class="contact-channel-card__label">Ubicación</span><strong>{{ $contact['location'] }}</strong><p>La visita y el retiro se coordinan previamente.</p>@if(($contact['map_url']??'')!=='')<a class="contact-channel-card__action" href="{{ $contact['map_url'] }}" target="_blank" rel="noopener noreferrer">Abrir ubicación <x-icon name="arrow-right" :size="16" /></a>@else<a class="contact-channel-card__action" href="{{ route('visits.create') }}">Agendar visita <x-icon name="arrow-right" :size="16" /></a>@endif</article>
             @if (($contact['hours'] ?? '') !== '')<article class="contact-channel-card"><x-icon name="clock" :size="28" /><span class="contact-channel-card__label">Horarios</span><strong>{{ $contact['hours'] }}</strong><p>Coordiná antes de acercarte.</p></article>@endif
         </div>

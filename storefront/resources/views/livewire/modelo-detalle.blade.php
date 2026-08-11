@@ -106,7 +106,7 @@
 
     $modelInfo = [
         'summary' => [
-            'Conocé este modelo eléctrico CommerceOps. Te asesoramos según disponibilidad, colores y forma de uso.',
+            'Conocé este modelo eléctrico ERP. Te asesoramos según disponibilidad, colores y forma de uso.',
         ],
         'ideal_for' => [
             'Traslados urbanos diarios',
@@ -119,7 +119,7 @@
             'Accesorios o trámites solo si se cotizan expresamente',
         ],
         'warranty' => [
-            'Garantía CommerceOps de 1 año o 6000 km, lo que ocurra primero.',
+            'Garantía ERP de 1 año o 6000 km, lo que ocurra primero.',
             'Requiere realizar los 4 mantenimientos correspondientes durante el primer año.',
             'No cubre golpes, accidentes, modificaciones, ingreso excesivo de agua, sobrecarga, falta de mantenimiento ni desgaste normal.',
         ],
@@ -151,7 +151,7 @@
                 'Empadronamiento, seguro SOA y accesorios no incluidos',
             ],
             'warranty' => [
-                'Garantía CommerceOps de 1 año o 6000 km, lo que ocurra primero.',
+                'Garantía ERP de 1 año o 6000 km, lo que ocurra primero.',
                 'Requiere realizar los 4 mantenimientos correspondientes durante el primer año.',
                 'No cubre golpes, accidentes, modificaciones, ingreso excesivo de agua, sobrecarga, falta de mantenimiento ni desgaste normal.',
             ],
@@ -184,7 +184,7 @@
                 'Empadronamiento, seguro SOA y accesorios no incluidos',
             ],
             'warranty' => [
-                'Garantía CommerceOps de 1 año o 6000 km, lo que ocurra primero.',
+                'Garantía ERP de 1 año o 6000 km, lo que ocurra primero.',
                 'Requiere realizar los 4 mantenimientos correspondientes durante el primer año.',
                 'No cubre golpes, accidentes, modificaciones, ingreso excesivo de agua, sobrecarga, falta de mantenimiento ni desgaste normal.',
             ],
@@ -218,7 +218,7 @@
                 'Accesorios o trámites solo si se cotizan expresamente',
             ],
             'warranty' => [
-                'Garantía CommerceOps de 1 año o 6000 km, lo que ocurra primero.',
+                'Garantía ERP de 1 año o 6000 km, lo que ocurra primero.',
                 'Requiere realizar los 4 mantenimientos correspondientes durante el primer año.',
                 'No cubre golpes, accidentes, modificaciones, ingreso excesivo de agua, sobrecarga, falta de mantenimiento ni desgaste normal.',
             ],

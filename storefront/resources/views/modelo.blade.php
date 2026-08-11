@@ -8,7 +8,7 @@
         'model'=>$moto->nombre,
         'description'=>$moto->descripcion,
         'image'=>collect($moto->imagenes??[])->map(fn(string $image)=>url(asset($image)))->values()->all(),
-        'brand'=>['@type'=>'Brand','name'=>'CommerceOps'],
+        'brand'=>['@type'=>'Brand','name'=>'ERP'],
         'category'=>'Bici-moto eléctrica',
         'url'=>$canonical,
         'additionalProperty'=>array_values(array_filter([
@@ -23,7 +23,7 @@
             'availability'=>$moto->disponible?'https://schema.org/InStock':'https://schema.org/OutOfStock',
             'itemCondition'=>'https://schema.org/NewCondition',
             'url'=>$canonical,
-            'seller'=>['@type'=>'Organization','name'=>'CommerceOps'],
+            'seller'=>['@type'=>'Organization','name'=>'ERP'],
         ],
     ];
     $breadcrumbSchema=[
@@ -36,18 +36,18 @@
         ],
     ];
     $normalizedModelName=\Illuminate\Support\Str::of($moto->nombre)->ascii()->lower()->toString();
-    $seoDescription='Conocé fotografías, variantes, precio y disponibilidad de '.$moto->nombre.' CommerceOps.';
+    $seoDescription='Conocé fotografías, variantes, precio y disponibilidad de '.$moto->nombre.' ERP.';
     if(str_contains($normalizedModelName,'sl')&&str_contains($normalizedModelName,'500')){
         $seoDescription='SL-500W eléctrica 500W y batería 20Ah: modelo urbano con canasto frontal, baúl trasero, autonomía aproximada de 50 km y retiro coordinado en zona Belvedere.';
     }elseif(str_contains($normalizedModelName,'q8')&&str_contains($normalizedModelName,'500')){
-        $seoDescription='Q8-500W eléctrica 500W: opción urbana compacta con variantes de color y batería, autonomía aproximada de 50 km y asesoramiento CommerceOps.';
+        $seoDescription='Q8-500W eléctrica 500W: opción urbana compacta con variantes de color y batería, autonomía aproximada de 50 km y asesoramiento ERP.';
     }
 @endphp
 @extends('layouts.storefront-public')
-@section('title',$moto->nombre.' | CommerceOps')
+@section('title',$moto->nombre.' | ERP')
 @section('description',$seoDescription)
 @section('canonical',$canonical)
-@if($firstImage)@section('og_image',url(asset($firstImage)))@section('og_image_alt',$moto->nombre.' CommerceOps')@endif
+@if($firstImage)@section('og_image',url(asset($firstImage)))@section('og_image_alt',$moto->nombre.' ERP')@endif
 @push('head')
     @if($firstImage)<link rel="preload" as="image" href="{{ asset($firstImage) }}">@endif
     <script type="application/ld+json">{!! json_encode($productSchema,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT) !!}</script>

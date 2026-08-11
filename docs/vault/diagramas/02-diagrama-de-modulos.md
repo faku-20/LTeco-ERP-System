@@ -1,4 +1,4 @@
-# Diagrama de Módulos — Panel Ltecobike V3
+# Diagrama de Módulos — Panel LTeco ERP System V3
 
 ```mermaid
 flowchart TD

@@ -1,5 +1,5 @@
 @extends('layouts.storefront-public')
-@section('title','Carrito | CommerceOps')
+@section('title','Carrito | ERP')
 @section('robots','noindex,nofollow')
 @section('content')
 <section class="storefront-cart-page">

@@ -1,6 +1,6 @@
 @extends('layouts.storefront-public')
 
-@section('title', 'Comprar | CommerceOps')
+@section('title', 'Comprar | ERP')
 @section('robots', 'noindex,nofollow')
 
 @section('content')

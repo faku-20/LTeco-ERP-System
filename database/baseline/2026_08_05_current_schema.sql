@@ -219,7 +219,7 @@ CREATE TABLE `configuracion` (
 /*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `configuracion_negocio` (
   `IdConfig` int(11) NOT NULL AUTO_INCREMENT,
-  `NombreEmpresa` varchar(150) NOT NULL DEFAULT 'Ltecobike',
+  `NombreEmpresa` varchar(150) NOT NULL DEFAULT 'ERP',
   `Whatsapp` varchar(30) DEFAULT NULL,
   `Direccion` varchar(255) DEFAULT NULL,
   `Logo` varchar(255) DEFAULT NULL,
@@ -660,8 +660,14 @@ CREATE TABLE `empresa` (
   `Instagram` varchar(100) DEFAULT NULL,
   `Facebook` varchar(255) DEFAULT NULL,
   `Logo` varchar(500) DEFAULT NULL,
+  `Favicon` varchar(500) DEFAULT NULL,
+  `ColorPrimario` varchar(7) DEFAULT NULL,
+  `ColorSecundario` varchar(7) DEFAULT NULL,
   `Direccion` varchar(255) DEFAULT NULL,
+  `SitioWeb` varchar(255) DEFAULT NULL,
   `Descripcion` varchar(500) DEFAULT NULL,
+  `PieDocumentos` text DEFAULT NULL,
+  `PoweredByEnabled` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`RUT`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1558,4 +1564,3 @@ CREATE TABLE `whatsapp_test_reset` (
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
-

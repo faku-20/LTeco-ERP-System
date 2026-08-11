@@ -1,7 +1,7 @@
 @extends('layouts.storefront-public')
 
-@section('title', 'Modelos de motos eléctricas en Uruguay | CommerceOps')
-@section('description', 'Compará motos eléctricas CommerceOps disponibles en Uruguay. Elegí modelo, color y batería, agregá al carrito o reservá online con retiro coordinado.')
+@section('title', 'Modelos de motos eléctricas en Uruguay | ERP')
+@section('description', 'Compará motos eléctricas ERP disponibles en Uruguay. Elegí modelo, color y batería, agregá al carrito o reservá online con retiro coordinado.')
 
 @section('content')
     @php
@@ -36,7 +36,7 @@
             ],
             [
                 'question' => '¿Qué garantía tienen?',
-                'answer' => 'Tienen garantía CommerceOps de 1 año o 6000 km, lo que ocurra primero, condicionada a realizar los 4 mantenimientos correspondientes durante el primer año.',
+                'answer' => 'Tienen garantía ERP de 1 año o 6000 km, lo que ocurra primero, condicionada a realizar los 4 mantenimientos correspondientes durante el primer año.',
             ],
             [
                 'question' => '¿Cómo consulto disponibilidad o modelos?',

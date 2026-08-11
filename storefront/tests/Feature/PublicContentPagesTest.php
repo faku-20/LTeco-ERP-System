@@ -12,7 +12,7 @@ final class PublicContentPagesTest extends TestCase
     {
         $pages = [
             '/modelos' => 'Elegí tu modelo ideal',
-            '/nosotros' => 'Sobre CommerceOps',
+            '/nosotros' => 'Sobre ERP',
             '/contacto' => 'Hablemos',
             '/privacidad' => 'Política de privacidad',
             '/agenda' => 'Agendá tu visita',

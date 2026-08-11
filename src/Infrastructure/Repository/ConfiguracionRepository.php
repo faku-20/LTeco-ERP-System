@@ -59,6 +59,30 @@ final class ConfiguracionRepository
     }
 
     /**
+     * @return list<string>
+     */
+    public function columnasEmpresa(): array
+    {
+        try {
+            $stmt = $this->pdo->query('SHOW COLUMNS FROM empresa');
+            if (!$stmt) {
+                return [];
+            }
+
+            $columnas = [];
+            foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $fila) {
+                if (isset($fila['Field'])) {
+                    $columnas[] = (string) $fila['Field'];
+                }
+            }
+
+            return $columnas;
+        } catch (\Throwable) {
+            return [];
+        }
+    }
+
+    /**
      * Contacto de la empresa para la prueba de WhatsApp (WhatsApp/Telefono).
      * Conserva la query legacy de whatsapp_probar.php (orden solo por Nombre).
      *

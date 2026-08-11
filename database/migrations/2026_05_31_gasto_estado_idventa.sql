@@ -1,4 +1,4 @@
--- Ltecobike V3
+-- ERP V3
 -- Permite vincular gastos automáticos con ventas y anularlos sin borrarlos.
 -- Los totales operativos de gastos deben considerar solo Estado = 'Activo'.
 

@@ -1,4 +1,4 @@
--- Ltecobike V3
+-- ERP V3
 -- Agrega el evento 'NOTIFICACION_WA' al enum de service_historial.TipoEvento.
 -- Sin esto, postventa/marcar_notificado_wa.php fallaba con STRICT_TRANS_TABLES
 -- ("Data truncated for column 'TipoEvento'") al registrar el recordatorio WhatsApp.

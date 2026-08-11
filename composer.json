@@ -1,6 +1,6 @@
 {
     "name": "ltecobike/ltecobike",
-    "description": "Sistema de gestión comercial Ltecobike (panel interno y web pública).",
+    "description": "Sistema ERP genérico para gestión comercial, panel interno y web pública.",
     "type": "project",
     "license": "proprietary",
     "require": {

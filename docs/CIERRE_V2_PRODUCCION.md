@@ -88,7 +88,7 @@ No se detectaron bloqueos funcionales para el alcance validado. V2 queda apta pa
 Ejecutada el 2026-07-11 con producción activa y sin modificar datos de negocio.
 
 - Se eliminaron copias históricas completas de V2 y V3, dumps intermedios, dumps vacíos y el paquete manual antiguo.
-- Se eliminaron snapshots locales de migración, copias antiguas de `.env` y temporales Ltecobike de `/tmp`.
+- Se eliminaron snapshots locales de migración, copias antiguas de `.env` y temporales LTeco ERP System de `/tmp`.
 - Se limpiaron 878,4 MB de caché de compilación Docker sin tocar imágenes, contenedores ni volúmenes activos.
 - Se revisó el código versionado: no se detectaron copias `.bak`, `.old`, `.orig` ni módulos duplicados aptos para borrar.
 - Se conservaron uploads reales, logs activos, `vendor`, rutas legacy documentadas y configuración local de herramientas.

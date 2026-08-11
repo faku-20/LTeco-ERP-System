@@ -1360,6 +1360,10 @@ if (!function_exists('obtenerConfiguracionNegocio')) {
             'Telefono' => '',
             'Instagram' => '',
             'Descripcion' => '',
+            'SitioWeb' => '',
+            'ColorPrimario' => '',
+            'ColorSecundario' => '',
+            'PoweredByEnabled' => poweredByEnabled() ? 1 : 0,
         ];
 
         try {

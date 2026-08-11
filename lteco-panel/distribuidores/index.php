@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Distribuidores | Lteco";
+$pageTitle = "Distribuidores | ERP";
 require_once __DIR__ . "/_common.php";
 require_once __DIR__ . "/../includes/flash.php";
 
@@ -99,7 +99,7 @@ if (esDistribuidor()) {
                             <th>Producto</th>
                             <th>Tipo</th>
                             <th>Stock</th>
-                            <th>Precio lista Ltecobike</th>
+                            <th>Precio lista ERP</th>
                             <th>N° motor</th>
                             <th>Acción</th>
                         </tr>
@@ -145,7 +145,7 @@ if (esDistribuidor()) {
                                 <td colspan="6" class="help-text" style="text-align:center;padding:24px 0;">
                                     Todavía no tenés stock asignado.
                                     <br>
-                                    <a href="<?= panelBaseUrl('distribuidores/nuevo_pedido.php') ?>">Solicitá stock a Ltecobike.</a>
+                                    <a href="<?= panelBaseUrl('distribuidores/nuevo_pedido.php') ?>">Solicitá stock a ERP.</a>
                                 </td>
                             </tr>
                         <?php endif; ?>

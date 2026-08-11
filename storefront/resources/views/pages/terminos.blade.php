@@ -1,7 +1,7 @@
 @extends('layouts.storefront-public')
 
-@section('title','Términos de compra y reserva | CommerceOps')
-@section('description','Condiciones de reserva, compra, pago, retiro, documentación y garantía de CommerceOps.')
+@section('title','Términos de compra y reserva | ERP')
+@section('description','Condiciones de reserva, compra, pago, retiro, documentación y garantía de ERP.')
 
 @section('content')
 <section class="phase1-page-hero phase1-page-hero-compact">
@@ -15,7 +15,7 @@
 <article class="phase1-legal phase1-container">
     <section>
         <h2>Alcance</h2>
-        <p>Estos términos aplican a las reservas y compras realizadas desde el storefront de CommerceOps. La información de precios, colores, configuración y disponibilidad puede requerir confirmación final por nuestro equipo antes de entregar el vehículo.</p>
+        <p>Estos términos aplican a las reservas y compras realizadas desde el storefront de ERP. La información de precios, colores, configuración y disponibilidad puede requerir confirmación final por nuestro equipo antes de entregar el vehículo.</p>
     </section>
 
     <section>
@@ -31,7 +31,7 @@
 
     <section>
         <h2>Retiro y coordinación</h2>
-        <p>No realizamos envíos desde la tienda online. El retiro se coordina previamente por WhatsApp o por los canales oficiales de CommerceOps. Atendemos en la zona de Belvedere, Montevideo, con visita previamente coordinada.</p>
+        <p>No realizamos envíos desde la tienda online. El retiro se coordina previamente por WhatsApp o por los canales oficiales de ERP. Atendemos en la zona de Belvedere, Montevideo, con visita previamente coordinada.</p>
     </section>
 
     <section>
@@ -46,10 +46,10 @@
 
     <section>
         <h2>Garantía y mantenimiento</h2>
-        <p>La garantía CommerceOps cubre defectos de fabricación o fallas de origen en motor eléctrico, controladora, sistema eléctrico original, cargador original y batería según condiciones específicas.</p>
+        <p>La garantía ERP cubre defectos de fabricación o fallas de origen en motor eléctrico, controladora, sistema eléctrico original, cargador original y batería según condiciones específicas.</p>
         <p>El período de garantía es de 1 año o 6000 km, lo que ocurra primero. Para mantener la cobertura, el vehículo debe presentarse a los 4 mantenimientos correspondientes, establecidos cada 3 meses o cada 1500 km durante el primer año.</p>
         <p>La garantía no cubre daños por golpes, choques, accidentes, uso indebido o negligente, modificaciones no autorizadas, ingreso excesivo de agua, sobrecarga del vehículo, falta de mantenimiento o desgaste normal por uso.</p>
-        <p>Para solicitar garantía, el cliente debe comunicarse con CommerceOps, presentar comprobante de compra o factura, entregar el vehículo para inspección técnica y esperar el diagnóstico correspondiente. CommerceOps determinará si la falla corresponde a garantía o a una reparación fuera de cobertura.</p>
+        <p>Para solicitar garantía, el cliente debe comunicarse con ERP, presentar comprobante de compra o factura, entregar el vehículo para inspección técnica y esperar el diagnóstico correspondiente. ERP determinará si la falla corresponde a garantía o a una reparación fuera de cobertura.</p>
     </section>
 
     <section>

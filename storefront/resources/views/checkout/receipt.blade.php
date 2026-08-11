@@ -1,6 +1,6 @@
 @extends('layouts.storefront-receipt')
 
-@section('title', 'Comprobante de compra | CommerceOps')
+@section('title', 'Comprobante de compra | ERP')
 
 @section('content')
 @php
@@ -30,7 +30,7 @@
     <section class="purchase-receipt__top">
         <div class="purchase-receipt__brand">
             <p>Comprobante de compra</p>
-            <h1>CommerceOps</h1>
+            <h1>ERP</h1>
             <span>+59892000086 contacto@example.com</span>
         </div>
         <aside class="purchase-receipt__summary-card">

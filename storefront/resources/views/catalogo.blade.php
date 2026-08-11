@@ -1,7 +1,7 @@
 @extends('layouts.storefront-public')
 
-@section('title','CommerceOps | Bici-motos y scooters eléctricos en Uruguay')
-@section('description','Bici-motos y scooters eléctricos en Uruguay. Comprá online, coordiná tu retiro en Belvedere y recibí atención directa de CommerceOps.')
+@section('title','ERP | Bici-motos y scooters eléctricos en Uruguay')
+@section('description','Bici-motos y scooters eléctricos en Uruguay. Comprá online, coordiná tu retiro en Belvedere y recibí atención directa de ERP.')
 
 @push('head')
     <link rel="preload" as="image" href="{{ asset('images/editorial/hero-principal.webp') }}" fetchpriority="high">

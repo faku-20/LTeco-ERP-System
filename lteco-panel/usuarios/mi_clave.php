@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Cambiar mi clave | Ltecobike";
+$pageTitle = "Cambiar mi clave | ERP";
 
 require_once __DIR__ . "/../includes/db.php";
 require_once __DIR__ . "/../includes/auth.php";

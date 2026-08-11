@@ -2,7 +2,7 @@
     'width' => 132,
     'height' => 54,
     'loading' => 'eager',
-    'alt' => config('storefront_content.brand', config('app.name', 'CommerceOps')),
+    'alt' => config('storefront_content.brand', config('app.name', 'ERP')),
 ])
 @php
     $svgRelative = 'images/brand/logo-ltecobike.svg';

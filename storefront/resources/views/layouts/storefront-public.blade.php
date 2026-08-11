@@ -2,8 +2,8 @@
     $seoIndexable=(bool)config('storefront_seo.indexable',false);
     $seoImage=url(asset(config('storefront_seo.default_image')));
     $contact=config('storefront_content.contact');
-    $brand=(string)config('storefront_content.brand',config('app.name','CommerceOps'));
-    $tagline=(string)config('storefront_content.tagline','Gestión comercial integral');
+    $brand=(string)config('storefront_content.brand',config('app.name','ERP'));
+    $tagline=(string)config('storefront_content.tagline','Sistema de Gestión Empresarial');
     $businessCategory=(string)config('storefront_content.business_category','productos y servicios');
     $phoneDigits=preg_replace('/\D+/','',(string)($contact['whatsapp_number']??''));
     $schemaPhone=$phoneDigits!==''?'+'.$phoneDigits:null;

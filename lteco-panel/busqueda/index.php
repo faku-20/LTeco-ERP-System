@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Buscador global | Lteco";
+$pageTitle = "Buscador global | ERP";
 
 require_once __DIR__ . "/../includes/db.php";
 require_once __DIR__ . "/../includes/auth.php";

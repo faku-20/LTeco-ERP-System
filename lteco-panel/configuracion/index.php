@@ -1,10 +1,11 @@
 <?php
-$pageTitle = "Configuración | Ltecobike";
 require_once __DIR__ . "/../includes/db.php";
 require_once __DIR__ . "/../includes/auth.php";
 requiereAdmin();
 require_once __DIR__ . "/../includes/helpers.php";
 require_once __DIR__ . "/../includes/whatsapp.php";
+
+$pageTitle = 'Identidad de empresa | ' . panelName();
 
 $esSuperadminConfig = function_exists('esSuperadmin') && esSuperadmin();
 
@@ -52,7 +53,7 @@ require_once __DIR__ . "/../includes/sidebar.php";
 <main class="main">
     <div class="topbar">
         <div>
-            <h1>Configuración</h1>
+            <h1>Identidad de empresa</h1>
 
 <?php if ($esSuperadminConfig): ?>
     <div class="lteco-config-header-actions">
@@ -65,7 +66,7 @@ require_once __DIR__ . "/../includes/sidebar.php";
     </div>
 <?php endif; ?>
 
-            <p class="subtle">Datos públicos de <?= htmlspecialchars(appName()) ?> y parámetros de negocio usados por el panel.</p>
+            <p class="subtle">Nombre, marca y datos visibles para la empresa instalada.</p>
         </div>
     </div>
 
@@ -101,6 +102,32 @@ require_once __DIR__ . "/../includes/sidebar.php";
                     <small class="field-help">Se usa como teléfono principal y para mensajes automáticos.</small>
                 </div>
 
+                <div class="form-group">
+                    <label>Sitio web</label>
+                    <input type="url" name="sitio_web" value="<?= h($empresa['SitioWeb'] ?? '', '') ?>" maxlength="255" placeholder="https://empresa.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Logo</label>
+                    <input type="text" name="logo" value="<?= h($empresa['Logo'] ?? '', '') ?>" maxlength="500" placeholder="/uploads/logo.png">
+                    <small class="field-help">URL o ruta pública del logo de la empresa.</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Favicon</label>
+                    <input type="text" name="favicon" value="<?= h($empresa['Favicon'] ?? '', '') ?>" maxlength="500" placeholder="/uploads/favicon.ico">
+                </div>
+
+                <div class="form-group">
+                    <label>Color principal</label>
+                    <input type="color" name="color_primario" value="<?= h($empresa['ColorPrimario'] ?? '#0f6b38', '#0f6b38') ?>">
+                </div>
+
+                <div class="form-group">
+                    <label>Color secundario</label>
+                    <input type="color" name="color_secundario" value="<?= h($empresa['ColorSecundario'] ?? '#151f1a', '#151f1a') ?>">
+                </div>
+
                 <div class="form-group full">
                     <label>Dirección</label>
                     <input type="text" name="direccion" value="<?= h($empresa['Direccion'] ?? '', '') ?>" maxlength="255">
@@ -110,6 +137,18 @@ require_once __DIR__ . "/../includes/sidebar.php";
                 <div class="form-group full">
                     <label>Descripción pública</label>
                     <textarea name="descripcion"><?= h($empresa['Descripcion'] ?? '', '') ?></textarea>
+                </div>
+
+                <div class="form-group full">
+                    <label>Pie de comprobantes/documentos</label>
+                    <textarea name="pie_documentos"><?= h($empresa['PieDocumentos'] ?? '', '') ?></textarea>
+                </div>
+
+                <div class="form-group full">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="powered_by_enabled" value="1" <?= ((int)($empresa['PoweredByEnabled'] ?? 1) === 1) ? 'checked' : '' ?>>
+                        Mostrar <?= h(poweredByText(), '') ?> en forma discreta
+                    </label>
                 </div>
             </div>
 

@@ -1,11 +1,11 @@
 @extends('layouts.storefront-public')
 
-@section('title', 'Ingresar | CommerceOps')
+@section('title', 'Ingresar | ERP')
 @section('robots', 'noindex,nofollow')
 
 @section(
     'description',
-    'Ingresá a tu cuenta de cliente de CommerceOps.'
+    'Ingresá a tu cuenta de cliente de ERP.'
 )
 
 @section('content')

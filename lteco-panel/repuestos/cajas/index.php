@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Cajas de repuestos | Lteco";
+$pageTitle = "Cajas de repuestos | ERP";
 require_once __DIR__ . "/../../includes/db.php";
 require_once __DIR__ . "/../../includes/auth.php";
 require_once __DIR__ . '/../../includes/flash.php';

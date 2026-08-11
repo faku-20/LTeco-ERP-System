@@ -19,7 +19,7 @@ integración.
 ## Artefactos locales no operativos
 
 - Binarios, agentes locales, logs de herramientas externas y utilidades sin
-  origen verificado no forman parte del runtime de Ltecobike. Deben permanecer
+  origen verificado no forman parte del runtime de LTeco ERP System. Deben permanecer
   sin permiso de ejecucion, fuera de Git y fuera de despliegues.
 - `ventoagent` y `ventoagent.log` se consideran artefactos locales ajenos al
   sistema: no se ejecutan, no se versionan y no son requisito para panel,

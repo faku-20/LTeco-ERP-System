@@ -55,11 +55,11 @@ self.addEventListener('push', event => {
   try {
     payload = event.data ? event.data.json() : {};
   } catch (error) {
-    payload = { title: 'Ltecobike', body: event.data ? event.data.text() : 'Nueva alerta' };
+    payload = { title: 'ERP', body: event.data ? event.data.text() : 'Nueva alerta' };
   }
   if (!payload || typeof payload !== 'object') payload = {};
 
-  const title = String(payload.title || 'Ltecobike').trim() || 'Ltecobike';
+  const title = String(payload.title || 'ERP').trim() || 'ERP';
   const body = String(payload.body || 'Nueva alerta del panel.').trim() || 'Nueva alerta del panel.';
   const target = internalTarget(payload.url);
   const timestamp = Number.isFinite(Number(payload.timestamp)) ? Number(payload.timestamp) : Date.now();

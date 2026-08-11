@@ -1,7 +1,7 @@
 {
-  "name": "Ltecobike Panel",
-  "short_name": "Ltecobike",
-  "description": "Panel interno de gestión Ltecobike",
+  "name": "ERP Panel",
+  "short_name": "ERP",
+  "description": "Panel interno de gestión ERP",
   "start_url": "/lteco-panel/",
   "scope": "/lteco-panel/",
   "display": "standalone",

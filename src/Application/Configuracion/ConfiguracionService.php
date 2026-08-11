@@ -40,6 +40,14 @@ final class ConfiguracionService
     }
 
     /**
+     * @return list<string>
+     */
+    public function columnasEmpresa(): array
+    {
+        return $this->repository->columnasEmpresa();
+    }
+
+    /**
      * @return array<string,mixed>|null
      */
     public function obtenerEmpresaContacto(): ?array
@@ -101,6 +109,11 @@ final class ConfiguracionService
                 'Instagram' => 'Instagram',
                 'Logo' => 'Logo',
                 'Direccion' => 'Direccion',
+                'SitioWeb' => 'SitioWeb',
+                'PieDocumentos' => 'TextoComprobante',
+                'ColorPrimario' => 'ColorPrimario',
+                'ColorSecundario' => 'ColorSecundario',
+                'PoweredByEnabled' => 'PoweredByEnabled',
             ] as $origen => $destino) {
                 if (!empty($rowEmp[$origen])) {
                     $config[$destino] = (string) $rowEmp[$origen];

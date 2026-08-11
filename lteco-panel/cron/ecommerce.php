@@ -30,7 +30,7 @@ if (in_array('--telegram-test', $argv, true)) {
     }
     $ok = true;
     foreach (telegramChatIds() as $chatId) {
-        $result = telegramSendMessage($chatId, "<b>Prueba Telegram Ltecobike</b>\nEl ecommerce puede enviar avisos de nuevas ventas por Telegram.", rtrim((string) configEnv('LTECO_PANEL_PUBLIC_URL', 'https://panel.ltecobike.shop'), '/') . '/lteco-panel/inicio.php', 'Abrir panel');
+        $result = telegramSendMessage($chatId, "<b>Prueba Telegram ERP</b>\nEl ecommerce puede enviar avisos de nuevas ventas por Telegram.", rtrim((string) configEnv('LTECO_PANEL_PUBLIC_URL', 'https://panel.ltecobike.shop'), '/') . '/lteco-panel/inicio.php', 'Abrir panel');
         $ok = $ok && !empty($result['ok']);
     }
     echo $ok ? "telegram-test: OK\n" : "telegram-test: FAIL\n";
@@ -57,7 +57,7 @@ if ($testTarget !== '') {
     }
     $ok = lteco_smtp_send_recipients(
         [$testTarget],
-        'Prueba de correo transaccional Ltecobike',
+        'Prueba de correo transaccional ERP',
         '<h1>Correo operativo correcto</h1><p>La cola transaccional de LTecobike puede enviar mensajes.</p>'
     );
     echo $ok ? "mail-test: OK\n" : "mail-test: FAIL\n";

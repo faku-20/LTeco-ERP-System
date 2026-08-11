@@ -160,7 +160,7 @@ function pushDispatchAutomationEvent(PDO $pdo, int $idEvent): array
         $product .= $extra > 0 ? ' y ' . $extra . ' más' : '';
         $payment = (string)$order['ProveedorPago'] === 'cash' ? 'Efectivo coordinado' : 'Tarjeta';
         $notification = json_encode([
-            'title' => 'Ltecobike — Nueva venta',
+            'title' => 'ERP — Nueva venta',
             'body' => 'Pedido #'.(string)$order['NumeroPedido'].'\n'.$product.'\nCliente: '.trim((string)$order['Nombre'].' '.(string)$order['Apellido']).'\nTotal: '.(string)$order['Moneda'].' '.number_format((float)$order['Total'],2,',','.').'\nPago: '.$payment.'\nEstado: '.(string)$order['Estado'],
             'order_id' => $orderId,
             'pedidoId' => $orderId,
@@ -176,7 +176,7 @@ function pushDispatchAutomationEvent(PDO $pdo, int $idEvent): array
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     } elseif ($eventKey === 'push_test') {
         $notification = json_encode([
-            'title' => 'Notificaciones Ltecobike activadas',
+            'title' => 'Notificaciones ERP activadas',
             'body' => 'Este dispositivo quedó vinculado al panel.',
             'url' => '/lteco-panel/configuracion/notificaciones.php',
             'tag' => 'push-test-' . $idEvent,

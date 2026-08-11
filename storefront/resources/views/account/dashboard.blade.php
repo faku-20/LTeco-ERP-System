@@ -1,5 +1,5 @@
 @extends('layouts.storefront-public')
-@section('title','Mi cuenta | CommerceOps')
+@section('title','Mi cuenta | ERP')
 @section('robots','noindex,nofollow')
 @section('content')
 @php

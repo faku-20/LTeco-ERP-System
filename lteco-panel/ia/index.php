@@ -1,5 +1,5 @@
 <?php
-$pageTitle = 'Asistente IA | Ltecobike';
+$pageTitle = 'Asistente IA | ERP';
 
 require_once __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/../includes/auth.php';

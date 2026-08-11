@@ -4,7 +4,7 @@ Estado de referencia: 2026-08-05
 Sistema relevado: repositorio `/opt/ltecobike`  
 Alcance: documentación, código, tests, migraciones y runbooks versionados
 
-Este documento evalúa el nivel de la documentación de Ltecobike y fija el
+Este documento evalúa el nivel de la documentación de LTeco ERP System y fija el
 estándar mínimo para mantenerla. Usa ISO/IEC 9126 como antecedente histórico y
 la familia ISO/IEC 25000 SQuaRE como marco vigente.
 
@@ -97,7 +97,7 @@ para evaluar esa característica.
 ISO/IEC 25001 se usa acá como gestión de calidad: quién mantiene requisitos,
 herramientas, evidencias y evaluación.
 
-| Área de gestión | Estado | Regla para Ltecobike |
+| Área de gestión | Estado | Regla para LTeco ERP System |
 |-----------------|--------|----------------------|
 | Responsabilidad | Parcial | Cada documento vigente debe declarar estado, alcance y fecha de referencia |
 | Planificación | Parcial | Cambios de release deben actualizar `docs/README.md` y el doc afectado |

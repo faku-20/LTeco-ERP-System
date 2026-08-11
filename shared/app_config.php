@@ -36,9 +36,11 @@
 
 const LTECO_PANEL_BASE_URL = '/lteco-panel';
 const LTECO_PUBLIC_BASE_URL = '/public-web';
-const LTECO_APP_NAME = 'CommerceOps';
-const LTECO_PANEL_NAME = 'Panel CommerceOps';
-const LTECO_APP_TAGLINE = 'Gestión comercial integral';
+const LTECO_PRODUCT_NAME = 'LTeco ERP System';
+const LTECO_PRODUCT_SHORT_NAME = 'LTeco ERP';
+const LTECO_APP_NAME = 'ERP';
+const LTECO_PANEL_NAME = 'Sistema ERP';
+const LTECO_APP_TAGLINE = 'Sistema de Gestión Empresarial';
 const LTECO_BUSINESS_CATEGORY = 'productos y servicios';
 const LTECO_DEFAULT_CURRENCY = 'USD';
 const LTECO_DEFAULT_EXCHANGE_RATE = 42.00;
@@ -130,6 +132,16 @@ function appName(): string
     return (string)configEnv('LTECO_APP_NAME', LTECO_APP_NAME);
 }
 
+function productName(): string
+{
+    return (string)configEnv('LTECO_PRODUCT_NAME', LTECO_PRODUCT_NAME);
+}
+
+function productShortName(): string
+{
+    return (string)configEnv('LTECO_PRODUCT_SHORT_NAME', LTECO_PRODUCT_SHORT_NAME);
+}
+
 function appTagline(): string
 {
     return (string)configEnv('LTECO_APP_TAGLINE', LTECO_APP_TAGLINE);
@@ -148,6 +160,16 @@ function businessCategory(): string
 function supportTeamName(): string
 {
     return (string)configEnv('LTECO_SUPPORT_TEAM_NAME', 'Equipo ' . appName());
+}
+
+function poweredByEnabled(): bool
+{
+    return in_array(strtolower((string)configEnv('LTECO_POWERED_BY_ENABLED', '1')), ['1', 'true', 'yes', 'on'], true);
+}
+
+function poweredByText(): string
+{
+    return 'Powered by ' . productShortName();
 }
 
 function panelBaseUrl(string $path = ''): string

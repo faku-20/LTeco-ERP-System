@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Buscar | Distribuidor | Lteco";
+$pageTitle = "Buscar | Distribuidor | ERP";
 require_once __DIR__ . "/_common.php";
 
 $idDistribuidor = requiereDistribuidorPanel();

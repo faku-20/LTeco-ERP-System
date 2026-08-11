@@ -8,7 +8,7 @@
         <img
             class="official-hero__image"
             src="{{ asset('images/legacy-home/hero-principal.webp') }}"
-            alt="Bici-moto eléctrica CommerceOps"
+            alt="Bici-moto eléctrica ERP"
             width="1672"
             height="941"
             fetchpriority="high"
@@ -104,7 +104,7 @@
     <section class="official-section legacy-home-split">
         <div class="official-container legacy-home-split__grid">
             <div>
-                <p class="official-kicker">Por qué elegir CommerceOps</p>
+                <p class="official-kicker">Por qué elegir ERP</p>
                 <h2>Movilidad eléctrica con identidad propia</h2>
                 <p>
                     Nuestros modelos combinan diseño, practicidad y una propuesta pensada para quienes buscan una nueva forma de moverse.
@@ -124,7 +124,7 @@
             <img
                 class="legacy-home-split__image"
                 src="{{ asset('images/legacy-home/q8-500-beige-rojo.webp') }}"
-                alt="Q8 500W beige CommerceOps"
+                alt="Q8 500W beige ERP"
                 loading="lazy"
                 decoding="async"
             >

@@ -1,4 +1,4 @@
--- Ltecobike V3 - Remitos de distribuidores + vínculo de facturación
+-- ERP V3 - Remitos de distribuidores + vínculo de facturación
 -- Idempotente para MariaDB.
 
 CREATE TABLE IF NOT EXISTS `remito` (

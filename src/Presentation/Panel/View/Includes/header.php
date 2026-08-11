@@ -7,6 +7,34 @@ if (!isset($pageTitle)) {
 }
 
 $bodyClass = $bodyClass ?? 'lteco-ui-v4';
+$identidadPanelHeader = [
+    'favicon' => panelBaseUrl('assets/img/logo.ico'),
+    'color_primario' => '#22c55e',
+];
+
+try {
+    if (isset($pdo) && $pdo instanceof PDO) {
+        $configuracionHeader = new \Lteco\Application\Configuracion\ConfiguracionService(
+            new \Lteco\Infrastructure\Repository\ConfiguracionRepository(
+                new \Lteco\Infrastructure\Db\Connection($pdo)
+            )
+        );
+        $empresaHeader = $configuracionHeader->obtenerEmpresa();
+        if ($empresaHeader) {
+            $faviconHeader = trim((string)($empresaHeader['Favicon'] ?? ''));
+            $colorPrimarioHeader = trim((string)($empresaHeader['ColorPrimario'] ?? ''));
+            $identidadPanelHeader['favicon'] = $faviconHeader !== '' ? $faviconHeader : $identidadPanelHeader['favicon'];
+            if (preg_match('/^#[0-9a-fA-F]{6}$/', $colorPrimarioHeader) === 1) {
+                $identidadPanelHeader['color_primario'] = strtolower($colorPrimarioHeader);
+            }
+        }
+    }
+} catch (Throwable) {
+    $identidadPanelHeader = [
+        'favicon' => panelBaseUrl('assets/img/logo.ico'),
+        'color_primario' => '#22c55e',
+    ];
+}
 ?>
 <!DOCTYPE html>
 <html lang="es" data-theme="light">
@@ -15,7 +43,7 @@ $bodyClass = $bodyClass ?? 'lteco-ui-v4';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
     <title><?= htmlspecialchars($pageTitle) ?></title>
-    <link rel="shortcut icon" href="<?= panelBaseUrl('assets/img/logo.ico') ?>" type="image/x-icon">
+    <link rel="shortcut icon" href="<?= htmlspecialchars($identidadPanelHeader['favicon'], ENT_QUOTES, 'UTF-8') ?>" type="image/x-icon">
 
     <script nonce="<?= cspNonce() ?>">
         // Aplica el tema guardado lo antes posible para evitar flash blanco
@@ -37,7 +65,7 @@ $bodyClass = $bodyClass ?? 'lteco-ui-v4';
     <script defer src="<?= panelBaseUrl('assets/js/panel-history-back.js') ?>?v=<?= @filemtime(LTECO_PANEL_PUBLIC_DIR . '/assets/js/panel-history-back.js') ?>"></script>
     <!-- Panel PWA -->
     <link rel="manifest" href="/lteco-panel/assets/manifest.json">
-    <meta name="theme-color" content="#22c55e">
+    <meta name="theme-color" content="<?= htmlspecialchars($identidadPanelHeader['color_primario'], ENT_QUOTES, 'UTF-8') ?>">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="<?= htmlspecialchars(panelName(), ENT_QUOTES, 'UTF-8') ?>">
     <script nonce="<?= cspNonce() ?>">

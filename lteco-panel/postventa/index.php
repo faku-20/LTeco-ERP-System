@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Postventa | Lteco";
+$pageTitle = "Postventa | ERP";
 require_once __DIR__ . "/../includes/db.php";
 require_once __DIR__ . "/../includes/auth.php";
 requiereModulo("postventa");
@@ -63,7 +63,7 @@ require_once __DIR__ . "/../includes/sidebar.php";
                 $motor    = htmlspecialchars((string)($r['NumeroMotor'] ?? ''));
                 $fecha    = htmlspecialchars(date('d/m/Y', strtotime((string)$r['FechaProgramada'])));
                 $numSvc   = (int)$r['NumeroService'];
-                $mensaje  = rawurlencode("Hola {$r['NombreApellido']}, te recordamos que el service #{$numSvc} de tu moto {$r['Modelo']} (motor: {$r['NumeroMotor']}) está programado para el {$fecha}. Por favor coordiná una visita. ¡Gracias! - Ltecobike");
+                $mensaje  = rawurlencode("Hola {$r['NombreApellido']}, te recordamos que el service #{$numSvc} de tu moto {$r['Modelo']} (motor: {$r['NumeroMotor']}) está programado para el {$fecha}. Por favor coordiná una visita. ¡Gracias! - ERP");
                 $waUrl    = $telefono ? "https://wa.me/598{$telefono}?text={$mensaje}" : null;
             ?>
             <li style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">

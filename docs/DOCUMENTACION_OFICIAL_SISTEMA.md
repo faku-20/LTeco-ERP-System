@@ -1,4 +1,4 @@
-# Documentación oficial del sistema Ltecobike
+# Documentación oficial del sistema LTeco ERP System
 
 Versión documental: 2026-08-05
 Sistema relevado: repositorio `/opt/ltecobike`  
@@ -11,7 +11,7 @@ Entorno local: `ltecobike_panel`, `ltecobike_web` y el stack `storefront_*` en D
 
 ## 1. Propósito
 
-Ltecobike es un sistema web para administrar la operación comercial de una empresa de movilidad eléctrica. Incluye un panel interno para ventas, stock, clientes, postventa, distribuidores, finanzas, usuarios, auditoría y configuración; además incluye una web pública de catálogo, contacto y verificación de comprobantes.
+LTeco ERP System es un sistema web para administrar la operación comercial de una empresa de movilidad eléctrica. Incluye un panel interno para ventas, stock, clientes, postventa, distribuidores, finanzas, usuarios, auditoría y configuración; además incluye una web pública de catálogo, contacto y verificación de comprobantes.
 
 El sistema está orientado a:
 

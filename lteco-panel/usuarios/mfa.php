@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "MFA de usuario | Ltecobike";
+$pageTitle = "MFA de usuario | ERP";
 
 require_once __DIR__ . "/../includes/db.php";
 require_once __DIR__ . "/../includes/auth.php";

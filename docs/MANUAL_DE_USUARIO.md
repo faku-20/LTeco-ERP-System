@@ -1,7 +1,7 @@
-# Manual de usuario Ltecobike
+# Manual de usuario LTeco ERP System
 
 Versión: 2026-05-28  
-Aplicación: Panel interno y web pública Ltecobike
+Aplicación: Panel interno y web pública LTeco ERP System
 
 ## 1. Acceso
 
@@ -36,7 +36,7 @@ Usar el menú lateral para moverse entre módulos. El botón `Salir` cierra la s
 
 El sistema ya tiene imágenes reales cargadas para vehículos. Estas fotos son las mismas que se usan en el catálogo y en fichas publicables:
 
-![Fotos reales de vehículos Ltecobike](assets/fotos-reales-catalogo-ltecobike.png)
+![Fotos reales de vehículos LTeco ERP System](assets/fotos-reales-catalogo-ltecobike.png)
 
 Las imágenes originales están en:
 

@@ -13,7 +13,7 @@ final class InstitutionalPagesTest extends TestCase
         $this
             ->get('/nosotros')
             ->assertOk()
-            ->assertSee('Sobre CommerceOps')
+            ->assertSee('Sobre ERP')
             ->assertSee('Nuestra misión')
             ->assertSee('Modelos para la ciudad')
             ->assertSee('Atención cercana')

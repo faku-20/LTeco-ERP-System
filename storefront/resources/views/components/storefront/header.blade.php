@@ -1,6 +1,6 @@
 @php
     $cartCount = app(\App\Services\CartManager::class)->count(request());
-    $brand = (string) config('storefront_content.brand', config('app.name', 'CommerceOps'));
+    $brand = (string) config('storefront_content.brand', config('app.name', 'ERP'));
     $tagline = (string) config('storefront_content.tagline', 'Gestión comercial');
 @endphp
 <header class="official-header">

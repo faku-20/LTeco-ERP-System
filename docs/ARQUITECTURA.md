@@ -1,4 +1,4 @@
-# Arquitectura — Ltecobike
+# Arquitectura — LTeco ERP System
 
 Documento de referencia técnica para desarrolladores.
 
@@ -14,7 +14,7 @@ La gobernanza documental y la matriz ISO/SQuaRE están en
 
 ## Visión general
 
-Ltecobike está compuesto por dos aplicaciones PHP legacy y un storefront Laravel:
+LTeco ERP System está compuesto por dos aplicaciones PHP legacy y un storefront Laravel:
 
 - `lteco-panel/`: panel interno PHP/Apache.
 - `public-web/`: web pública legacy PHP/Apache.

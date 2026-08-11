@@ -2,7 +2,7 @@
 
 @section(
     'title',
-    'Verificar correo electrónico | CommerceOps'
+    'Verificar correo electrónico | ERP'
 )
 
 @section('robots', 'noindex,nofollow')

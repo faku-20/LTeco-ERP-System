@@ -31,7 +31,7 @@ $qrPayload = panelAbsoluteUrl('repuestos/cajas/ver.php?t=' . urlencode((string)$
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>QR caja <?= h($caja['Codigo'], '') ?> | Ltecobike</title>
+    <title>QR caja <?= h($caja['Codigo'], '') ?> | ERP</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:#f7f3ea;color:#17251d;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -62,7 +62,7 @@ $qrPayload = panelAbsoluteUrl('repuestos/cajas/ver.php?t=' . urlencode((string)$
 
         <section class="label">
             <div>
-                <div class="brand">Ltecobike</div>
+                <div class="brand">ERP</div>
                 <div class="subbrand">Caja de repuestos</div>
                 <div class="item"><span>Código</span><strong><?= h($caja['Codigo'], '') ?></strong></div>
                 <div class="item"><span>Ubicación</span><strong><?= h($caja['Ubicacion']) ?></strong></div>

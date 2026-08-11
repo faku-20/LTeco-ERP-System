@@ -22,6 +22,13 @@ $telefono = normalizarTelefono($_POST['telefono'] ?? null);
 $whatsApp = $telefono;
 $direccion = limpiarTextoOpcional(normalizarTextoHumano($_POST['direccion'] ?? '', 255));
 $descripcion = limpiarTextoOpcional($_POST['descripcion'] ?? null);
+$sitioWeb = limpiarTextoOpcional(normalizarTextoHumano($_POST['sitio_web'] ?? '', 255));
+$logo = limpiarTextoOpcional(normalizarTextoHumano($_POST['logo'] ?? '', 500));
+$favicon = limpiarTextoOpcional(normalizarTextoHumano($_POST['favicon'] ?? '', 500));
+$colorPrimario = normalizarTextoHumano($_POST['color_primario'] ?? '#0f6b38', 7);
+$colorSecundario = normalizarTextoHumano($_POST['color_secundario'] ?? '#151f1a', 7);
+$pieDocumentos = limpiarTextoOpcional($_POST['pie_documentos'] ?? null);
+$poweredByEnabled = isset($_POST['powered_by_enabled']) ? 1 : 0;
 $rutEmpresa = $rutEmpresa !== '' ? $rutEmpresa : defaultEmpresaRut();
 
 // WhatsApp Cloud API: solo Superadmin puede modificar estos valores.
@@ -33,6 +40,18 @@ $waTplSvc   = $esSuperadminConfig ? limpiarTextoOpcional($_POST['wa_tpl_service'
 
 if ($correo !== null && !filter_var($correo, FILTER_VALIDATE_EMAIL)) {
     redirectWithFlash(panelBaseUrl('configuracion/index.php'), 'error', 'El correo de la empresa no tiene un formato válido.');
+}
+
+if ($sitioWeb !== null && !filter_var($sitioWeb, FILTER_VALIDATE_URL)) {
+    redirectWithFlash(panelBaseUrl('configuracion/index.php'), 'error', 'El sitio web de la empresa no tiene un formato válido.');
+}
+
+if (!preg_match('/^#[0-9a-fA-F]{6}$/', $colorPrimario)) {
+    $colorPrimario = '#0f6b38';
+}
+
+if (!preg_match('/^#[0-9a-fA-F]{6}$/', $colorSecundario)) {
+    $colorSecundario = '#151f1a';
 }
 
 $configService = new \Lteco\Application\Configuracion\ConfiguracionService(
@@ -84,7 +103,19 @@ try {
         'Descripcion' => $descripcion,
         'Direccion' => $direccion,
         'RazonSocial' => $razonSocial,
+        'Logo' => $logo,
+        'Favicon' => $favicon,
+        'ColorPrimario' => strtolower($colorPrimario),
+        'ColorSecundario' => strtolower($colorSecundario),
+        'SitioWeb' => $sitioWeb,
+        'PieDocumentos' => $pieDocumentos,
+        'PoweredByEnabled' => $poweredByEnabled,
     ];
+
+    $columnasDisponibles = $configService->columnasEmpresa();
+    if ($columnasDisponibles) {
+        $empresaColumns = array_intersect_key($empresaColumns, array_flip($columnasDisponibles));
+    }
 
     if ($empresa) {
         $rutAnterior = (string)($empresa['RUT'] ?? '');

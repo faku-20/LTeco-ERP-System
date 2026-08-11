@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Nueva venta | Lteco";
+$pageTitle = "Nueva venta | ERP";
 require_once __DIR__ . "/_common.php";
 
 $idDistribuidor = requiereDistribuidorPanel();
@@ -378,7 +378,7 @@ $repuestosStock = array_values(array_filter($stock, static fn($i) => $i['TipoIte
                         style="background:rgba(255,255,255,.06);border:1.5px solid var(--color-border-secondary,#3a332b);color:var(--color-text-primary,#f5f5f5);cursor:not-allowed;opacity:1;"
                     >
                     <small id="precioMinimoRef" style="display:none;margin-top:4px;color:var(--color-text-secondary,#d1c7b8);">
-                        Este precio lo define Ltecobike. Precio mínimo interno: <strong id="precioMinimoVal"></strong>
+                        Este precio lo define ERP. Precio mínimo interno: <strong id="precioMinimoVal"></strong>
                     </small>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Reportes de distribuidores | Lteco";
+$pageTitle = "Reportes de distribuidores | ERP";
 require_once __DIR__ . "/_common.php";
 require_once __DIR__ . "/../includes/flash.php";
 

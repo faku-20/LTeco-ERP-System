@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-$pageTitle = 'Notificaciones | Ltecobike';
+$pageTitle = 'Notificaciones | ERP';
 require_once __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/helpers.php';
@@ -53,8 +53,8 @@ require_once __DIR__ . '/../includes/sidebar.php';
 
     <section class="section-box section-box--soft">
         <h2>En teléfonos</h2>
-        <p><strong>Android:</strong> usá Chrome, permití notificaciones y configurá el canal de Ltecobike con importancia <strong>Alta</strong> o <strong>Urgente</strong>. Activá sonido, vibración, mostrar como emergente y mostrar en pantalla bloqueada.</p>
-        <p>La ruta habitual es <strong>Ajustes del teléfono → Notificaciones → Chrome → Ltecobike</strong> (o el nombre de la PWA) → activar <strong>Permitir sonido</strong>, <strong>Vibración</strong>, <strong>Mostrar como emergente</strong> y <strong>Pantalla bloqueada</strong>. Los nombres pueden variar según fabricante y versión de Android.</p>
+        <p><strong>Android:</strong> usá Chrome, permití notificaciones y configurá el canal de ERP con importancia <strong>Alta</strong> o <strong>Urgente</strong>. Activá sonido, vibración, mostrar como emergente y mostrar en pantalla bloqueada.</p>
+        <p>La ruta habitual es <strong>Ajustes del teléfono → Notificaciones → Chrome → ERP</strong> (o el nombre de la PWA) → activar <strong>Permitir sonido</strong>, <strong>Vibración</strong>, <strong>Mostrar como emergente</strong> y <strong>Pantalla bloqueada</strong>. Los nombres pueden variar según fabricante y versión de Android.</p>
         <p><strong>iPhone/iPad:</strong> abrí el panel en Safari, elegí “Agregar a pantalla de inicio”, abrí la PWA instalada y recién ahí activá las notificaciones.</p>
         <p class="field-help">Web Push no puede crear ni elevar por sí mismo la importancia de un canal Android como una aplicación nativa. No molestar, Focus, ahorro de batería y los ajustes del sistema pueden limitar sonido, vibración o encendido de pantalla.</p>
     </section>

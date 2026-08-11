@@ -1,4 +1,4 @@
-# Documentación Ltecobike
+# Documentación LTeco ERP System
 
 Estado de referencia: 2026-08-05. El repositorio contiene dos superficies públicas: la web legacy y el nuevo storefront Laravel. Para despliegues, consultar primero [MIGRACION_SERVIDOR.md](MIGRACION_SERVIDOR.md) y [storefront/README.md](../storefront/README.md).
 

@@ -1,5 +1,5 @@
 <?php
-$pageTitle = 'Inicio | ' . 'Ltecobike';
+$pageTitle = 'Inicio | ' . 'ERP';
 
 require_once __DIR__ . '/includes/db.php';
 require_once __DIR__ . '/includes/auth.php';
@@ -23,7 +23,7 @@ if ($esDist) {
     $opciones = [
         ['url' => panelBaseUrl('distribuidores/index.php'),        'icon' => 'bar-chart',   'label' => 'Panel distribuidor', 'desc' => 'Resumen de stock, ventas y pedidos', 'color' => 'brand'],
         ['url' => panelBaseUrl('distribuidores/nueva_venta.php'),  'icon' => 'plus-circle', 'label' => 'Nueva venta',        'desc' => 'Vender desde tu stock asignado',     'color' => 'neutral'],
-        ['url' => panelBaseUrl('distribuidores/nuevo_pedido.php'), 'icon' => 'package',     'label' => 'Solicitar stock',    'desc' => 'Pedir unidades a Ltecobike',         'color' => 'neutral'],
+        ['url' => panelBaseUrl('distribuidores/nuevo_pedido.php'), 'icon' => 'package',     'label' => 'Solicitar stock',    'desc' => 'Pedir unidades a ERP',         'color' => 'neutral'],
         ['url' => panelBaseUrl('distribuidores/busqueda.php'),     'icon' => 'search',      'label' => 'Buscar',             'desc' => 'Buscar en tu stock, ventas y clientes', 'color' => 'neutral'],
     ];
 } elseif ($esAdmin) {
@@ -74,12 +74,12 @@ if ($esDist) {
     <link rel="manifest" href="/lteco-panel/assets/manifest.json">
     <meta name="theme-color" content="#22c55e">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Ltecobike Panel">
+    <meta name="application-name" content="ERP Panel">
     <script nonce="<?= cspNonce() ?>">
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function () {
             navigator.serviceWorker.register('/lteco-panel/sw.js?v=20260801-push-attention').catch(function (error) {
-            console.warn('Ltecobike PWA SW error:', error);
+            console.warn('ERP PWA SW error:', error);
           });
         });
       }

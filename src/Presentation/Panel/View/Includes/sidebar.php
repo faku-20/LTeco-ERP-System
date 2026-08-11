@@ -3,6 +3,36 @@ $usuarioSidebar = usuarioActual();
 $nombreSidebar = (string)($usuarioSidebar['NombreCompleto'] ?? $usuarioSidebar['Usuario'] ?? 'Usuario');
 $rolSidebar = rolActual();
 $rutaActualSidebar = (string)($_SERVER['REQUEST_URI'] ?? '');
+$marcaPanel = [
+    'nombre' => appName(),
+    'subtitulo' => appTagline(),
+    'logo' => panelBaseUrl('assets/img/logo.png'),
+    'powered_by' => poweredByEnabled(),
+];
+
+try {
+    if (isset($pdo) && $pdo instanceof PDO) {
+        $configuracionSidebar = new \Lteco\Application\Configuracion\ConfiguracionService(
+            new \Lteco\Infrastructure\Repository\ConfiguracionRepository(
+                new \Lteco\Infrastructure\Db\Connection($pdo)
+            )
+        );
+        $empresaSidebar = $configuracionSidebar->obtenerEmpresa();
+
+        if ($empresaSidebar) {
+            $nombreEmpresaSidebar = trim((string)($empresaSidebar['Nombre'] ?? ''));
+            $logoEmpresaSidebar = trim((string)($empresaSidebar['Logo'] ?? ''));
+            $marcaPanel['nombre'] = $nombreEmpresaSidebar !== '' ? $nombreEmpresaSidebar : $marcaPanel['nombre'];
+            $marcaPanel['logo'] = $logoEmpresaSidebar !== '' ? $logoEmpresaSidebar : $marcaPanel['logo'];
+            $marcaPanel['powered_by'] = (int)($empresaSidebar['PoweredByEnabled'] ?? ($marcaPanel['powered_by'] ? 1 : 0)) === 1;
+        }
+    }
+} catch (Throwable) {
+    $marcaPanel['nombre'] = appName();
+    $marcaPanel['subtitulo'] = appTagline();
+    $marcaPanel['logo'] = panelBaseUrl('assets/img/logo.png');
+    $marcaPanel['powered_by'] = poweredByEnabled();
+}
 
 if (!function_exists('sidebarV4Activo')) {
     function sidebarV4Activo(string $needle, string $rutaActual): string
@@ -83,10 +113,13 @@ foreach ($navAdmin as $item) { if ($item['visible']) { $mostrarAdmin = true; bre
 
 <aside class="sidebar-v4 sidebar">
     <a class="brand-v4 sidebar-brand" href="<?= panelBaseUrl(esSuperadmin() ? 'dashboard.php' : 'inicio.php') ?>">
-        <img src="<?= panelBaseUrl('assets/img/logo.png') ?>" alt="<?= htmlspecialchars(appName(), ENT_QUOTES, 'UTF-8') ?>">
+        <img src="<?= htmlspecialchars($marcaPanel['logo'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($marcaPanel['nombre'], ENT_QUOTES, 'UTF-8') ?>">
         <span class="brand-copy">
-            <strong class="brand-title"><?= htmlspecialchars(appName(), ENT_QUOTES, 'UTF-8') ?></strong>
-            <span class="brand-subtitle"><?= htmlspecialchars(appTagline(), ENT_QUOTES, 'UTF-8') ?></span>
+            <strong class="brand-title"><?= htmlspecialchars($marcaPanel['nombre'], ENT_QUOTES, 'UTF-8') ?></strong>
+            <span class="brand-subtitle"><?= htmlspecialchars($marcaPanel['subtitulo'], ENT_QUOTES, 'UTF-8') ?></span>
+            <?php if ($marcaPanel['powered_by']): ?>
+                <span class="brand-subtitle"><?= htmlspecialchars(poweredByText(), ENT_QUOTES, 'UTF-8') ?></span>
+            <?php endif; ?>
         </span>
     </a>
 

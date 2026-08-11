@@ -9,8 +9,8 @@ $whatsappNumber = preg_replace(
 ) ?: '';
 
 return [
-    'brand' => (string) env('STOREFRONT_BRAND_NAME', env('APP_NAME', 'CommerceOps')),
-    'tagline' => (string) env('STOREFRONT_BRAND_TAGLINE', 'Gestión comercial integral'),
+    'brand' => (string) env('STOREFRONT_BRAND_NAME', env('APP_NAME', 'ERP')),
+    'tagline' => (string) env('STOREFRONT_BRAND_TAGLINE', 'Sistema de Gestión Empresarial'),
     'business_category' => (string) env('STOREFRONT_BUSINESS_CATEGORY', 'productos y servicios'),
 
     'contact' => [

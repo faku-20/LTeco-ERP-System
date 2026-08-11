@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Nuevo pedido distribuidor | Lteco";
+$pageTitle = "Nuevo pedido distribuidor | ERP";
 require_once __DIR__ . "/_common.php";
 require_once __DIR__ . "/../includes/flash.php";
 
@@ -208,7 +208,7 @@ require_once __DIR__ . "/../includes/sidebar.php";
         const cantidad = parseInt(cantidadInput.value, 10) || 1;
         const submitBtn = document.querySelector('button[type="submit"]');
         if (stock === 0) {
-            warning.textContent = 'Este ítem no tiene stock disponible en Ltecobike. No podés enviar el pedido.';
+            warning.textContent = 'Este ítem no tiene stock disponible en ERP. No podés enviar el pedido.';
             warning.style.display = '';
             submitBtn.disabled = true;
         } else if (cantidad > stock) {

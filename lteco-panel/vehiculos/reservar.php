@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Reservar vehículo | Lteco";
+$pageTitle = "Reservar vehículo | ERP";
 require_once __DIR__ . "/../includes/db.php";
 require_once __DIR__ . "/../includes/auth.php";
 requiereLogin();

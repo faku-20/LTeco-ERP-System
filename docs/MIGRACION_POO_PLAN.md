@@ -1,4 +1,4 @@
-# Plan Maestro de Migración POO — Ltecobike
+# Plan Maestro de Migración POO — LTeco ERP System
 
 > **Documento histórico.** La migración descrita aquí se cerró en junio de
 > 2026. La rama operativa actual es `main`; no cambiar a
@@ -19,7 +19,7 @@
 
 ## 1. Objetivo de la migración
 
-El objetivo de esta migración no es “hacer POO por capricho”, sino ordenar progresivamente el sistema Ltecobike para que sea más mantenible, testeable y seguro de modificar.
+El objetivo de esta migración no es “hacer POO por capricho”, sino ordenar progresivamente el sistema LTeco ERP System para que sea más mantenible, testeable y seguro de modificar.
 
 El sistema original creció con páginas PHP que mezclan:
 

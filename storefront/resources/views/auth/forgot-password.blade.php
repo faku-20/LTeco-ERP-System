@@ -1,3 +1,3 @@
 @extends('layouts.storefront-public')
-@section('title','Recuperar contraseña | CommerceOps') @section('robots','noindex,nofollow')
+@section('title','Recuperar contraseña | ERP') @section('robots','noindex,nofollow')
 @section('content')<section class="customer-auth"><div class="customer-auth__container"><header class="customer-auth__heading"><p class="phase1-eyebrow">Cuenta de cliente</p><h1>Recuperar contraseña</h1><p>Te enviaremos un enlace de uso único a tu correo.</p></header><form class="customer-auth__form" method="POST" action="{{ route('password.email') }}">@csrf @if(session('status'))<p class="customer-auth__notice">{{ session('status') }}</p>@endif<label>Correo electrónico<input type="email" name="email" value="{{ old('email') }}" required autofocus></label>@error('email')<small class="customer-auth__error">{{ $message }}</small>@enderror<button class="phase1-button customer-auth__submit">Enviar enlace</button></form></div></section>@endsection

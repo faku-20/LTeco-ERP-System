@@ -35,7 +35,7 @@ require __DIR__.'/includes/header.php';?>
       </div>
     </div>
     <div class="editorial-hero__media">
-      <img src="<?=publicBaseUrl('assets/img/heroPrincipal.webp')?>" alt="Scooter eléctrico CommerceOps en la rambla de Montevideo">
+      <img src="<?=publicBaseUrl('assets/img/heroPrincipal.webp')?>" alt="Scooter eléctrico ERP en la rambla de Montevideo">
     </div>
   </div>
 </section>

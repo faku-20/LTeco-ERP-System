@@ -1,4 +1,4 @@
-# Guía de usuario — Panel Ltecobike
+# Guía de usuario — Panel LTeco ERP System
 
 Panel interno de gestión comercial para movilidad eléctrica.  
 URL del panel: `http://127.0.0.1:8081/lteco-panel/` (local) o la URL de producción configurada.

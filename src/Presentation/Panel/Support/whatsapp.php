@@ -1,6 +1,6 @@
 <?php
 /**
- * WhatsApp Cloud API — Ltecobike
+ * WhatsApp Cloud API — ERP
  * Envía mensajes de template directo a Meta sin BSP intermediario.
  * Si WHATSAPP_ENABLED=false o las credenciales no están configuradas,
  * todas las funciones retornan false/void sin lanzar excepciones.

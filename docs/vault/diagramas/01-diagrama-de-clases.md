@@ -1,4 +1,4 @@
-# Diagrama de Clases — Ltecobike V3
+# Diagrama de Clases — LTeco ERP System V3
 
 ```mermaid
 classDiagram

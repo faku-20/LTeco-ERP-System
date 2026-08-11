@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Editar vehículo | Lteco";
+$pageTitle = "Editar vehículo | ERP";
 require_once __DIR__ . "/../includes/db.php";
 require_once __DIR__ . "/../includes/auth.php";
 requiereLogin();
@@ -510,7 +510,7 @@ require_once __DIR__ . "/../includes/sidebar.php";
                 <?php else: ?>
                     <div class="vehicle-qr-empty">Sin motor</div>
                 <?php endif; ?>
-                <small>Uso interno Ltecobike</small>
+                <small>Uso interno ERP</small>
             </div>
         </section>
     <?php endif; ?>

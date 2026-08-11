@@ -61,7 +61,7 @@
 
   async function localTest(registration) {
     attentionPulse();
-    await registration.showNotification("Notificaciones Ltecobike activadas", {
+    await registration.showNotification("Notificaciones ERP activadas", {
       body: "Este dispositivo quedó vinculado al panel.",
       icon: "/lteco-panel/assets/icons/icon-192.png",
       badge: "/lteco-panel/assets/icons/icon-192.png",
@@ -139,7 +139,7 @@
 
       if (activate) activate.addEventListener("click", function () { activatePush().catch(function (error) { setStatus(error.message, "error"); }); });
       if (deactivate) deactivate.addEventListener("click", function () { deactivatePush().catch(function (error) { setStatus(error.message, "error"); }); });
-      if (test) test.addEventListener("click", function () { test.disabled = true; serverTest().then(function () { setStatus("Prueba enviada. Si Android no emite sonido, revisá la importancia del canal de Chrome/Ltecobike.", "success"); }).catch(function (error) { setStatus(error.message, "error"); }).finally(function () { test.disabled = false; }); });
+      if (test) test.addEventListener("click", function () { test.disabled = true; serverTest().then(function () { setStatus("Prueba enviada. Si Android no emite sonido, revisá la importancia del canal de Chrome/ERP.", "success"); }).catch(function (error) { setStatus(error.message, "error"); }).finally(function () { test.disabled = false; }); });
       if (toggle) toggle.addEventListener("click", function () { (subscription ? localTest(registration) : activatePush()).catch(function (error) { window.alert(error.message); }); });
     } catch (error) {
       setStatus("No se pudo inicializar el registro de notificaciones.", "error");

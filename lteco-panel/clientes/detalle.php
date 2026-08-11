@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Detalle de cliente | Lteco";
+$pageTitle = "Detalle de cliente | ERP";
 
 require_once __DIR__ . "/../includes/db.php";
 require_once __DIR__ . "/../includes/auth.php";

@@ -1,5 +1,5 @@
 <?php
-$pageTitle = 'Administración | Ltecobike';
+$pageTitle = 'Administración | ERP';
 
 require_once __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/../includes/auth.php';

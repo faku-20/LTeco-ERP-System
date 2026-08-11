@@ -1,7 +1,7 @@
 @php
     $contact = config('storefront_content.contact');
-    $brand = (string) config('storefront_content.brand', config('app.name', 'CommerceOps'));
-    $tagline = (string) config('storefront_content.tagline', 'Gestión comercial integral');
+    $brand = (string) config('storefront_content.brand', config('app.name', 'ERP'));
+    $tagline = (string) config('storefront_content.tagline', 'Sistema de Gestión Empresarial');
 @endphp
 <footer class="official-footer">
     <div class="official-container official-footer__grid">

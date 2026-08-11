@@ -1,5 +1,5 @@
 @extends('layouts.storefront-public')
-@section('title','Calculadora de ahorro: nafta, ómnibus y eléctrico | CommerceOps')
+@section('title','Calculadora de ahorro: nafta, ómnibus y eléctrico | ERP')
 @section('description','Compará el costo estimado de viajar en nafta u ómnibus urbano frente a la carga eléctrica.')
 @section('content')
 <section class="savings-calculator" data-savings-calculator>
@@ -33,7 +33,7 @@
                 <label data-gas-field>Tarifa eléctrica (UYU/kWh)<input type="number" min="0.01" step="0.01" value="8" data-electric-price inputmode="decimal"></label>
                 <input type="hidden" value="8" data-electric-price-default>
                 <div class="savings-assumption">
-                    <span>Rendimiento eléctrico CommerceOps</span>
+                    <span>Rendimiento eléctrico ERP</span>
                     <strong>45 km/kWh</strong>
                     <input type="hidden" value="45" data-electric-efficiency>
                 </div>

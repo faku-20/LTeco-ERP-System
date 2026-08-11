@@ -1,4 +1,4 @@
--- Ltecobike panel - migración correctiva V2.19
+-- ERP panel - migración correctiva V2.19
 -- Ejecutar sobre la base lteco_db antes de levantar el panel corregido.
 -- Probado para MariaDB/MySQL modernos. Hacer backup antes de aplicar.
 

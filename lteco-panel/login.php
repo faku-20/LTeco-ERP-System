@@ -140,16 +140,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php if (turnstileEnabled()): ?>
         <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <?php endif; ?>
-    <!-- Ltecobike PWA -->
+    <!-- ERP PWA -->
     <link rel="manifest" href="/lteco-panel/assets/manifest.json">
     <meta name="theme-color" content="#22c55e">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Ltecobike Panel">
+    <meta name="application-name" content="ERP Panel">
     <script nonce="<?= cspNonce() ?>">
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function () {
             navigator.serviceWorker.register('/lteco-panel/sw.js?v=20260801-push-attention').catch(function (error) {
-            console.warn('Ltecobike PWA SW error:', error);
+            console.warn('ERP PWA SW error:', error);
           });
         });
       }

@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Asignar stock | Lteco";
+$pageTitle = "Asignar stock | ERP";
 require_once __DIR__ . "/_common.php";
 require_once __DIR__ . "/../includes/flash.php";
 

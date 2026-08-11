@@ -110,10 +110,10 @@ Todas son aditivas y no reemplazan tablas existentes de ventas, clientes, vehicu
 
 - Pantalla: `Automatizaciones -> n8n`.
 - Workflows migrados a V2 el 10/07/2026:
-  - `Ltecobike - Poll automation events`: activo cada minuto como respaldo de entrega Web Push; solo procesa eventos de visitas.
-  - `Ltecobike - Daily operational digest`: activo; consulta el resumen operativo diario en modo lectura.
-  - `Ltecobike - Meta WhatsApp inbound`: activo; reenvía payloads Meta al endpoint interno V2.
-  - `Ltecobike - Android visit push`: activo; recibe el webhook inmediato y solicita la entrega push al panel.
+  - `LTeco ERP System - Poll automation events`: activo cada minuto como respaldo de entrega Web Push; solo procesa eventos de visitas.
+  - `LTeco ERP System - Daily operational digest`: activo; consulta el resumen operativo diario en modo lectura.
+  - `LTeco ERP System - Meta WhatsApp inbound`: activo; reenvía payloads Meta al endpoint interno V2.
+  - `LTeco ERP System - Android visit push`: activo; recibe el webhook inmediato y solicita la entrega push al panel.
 - Usan `https://panel.ltecobike.shop/lteco-panel/api/n8n/*.php` y el header `X-Lteco-N8n-Token`.
 - Se generó un backup previo a la migración n8n; fue retirado durante la limpieza posterior al cierre.
 - Webhooks salientes configurables por evento:
