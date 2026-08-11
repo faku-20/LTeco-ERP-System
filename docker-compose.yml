@@ -5,7 +5,7 @@ services:
       dockerfile: docker/Dockerfile.web
     container_name: lteco_erp_web
     ports:
-      - "127.0.0.1:8180:80"
+      - "192.168.50.170:8180:80"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: always
@@ -23,7 +23,7 @@ services:
       dockerfile: docker/Dockerfile.panel
     container_name: lteco_erp_panel
     ports:
-      - "127.0.0.1:8181:80"
+      - "192.168.50.170:8181:80"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: always

@@ -30,7 +30,7 @@ services:
         condition: service_healthy
     restart: unless-stopped
     ports:
-      - "127.0.0.1:8182:80"
+      - "192.168.50.170:8182:80"
     volumes:
       - ./storefront/public:/var/www/html/public:ro,z
       - ./docker/nginx-storefront.conf:/etc/nginx/conf.d/default.conf:ro,z
