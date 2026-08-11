@@ -3,9 +3,9 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile.web
-    container_name: ltecobike_web
+    container_name: lteco_erp_web
     ports:
-      - "127.0.0.1:8080:80"
+      - "127.0.0.1:8180:80"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: always
@@ -21,9 +21,9 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile.panel
-    container_name: ltecobike_panel
+    container_name: lteco_erp_panel
     ports:
-      - "127.0.0.1:8081:80"
+      - "127.0.0.1:8181:80"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: always
@@ -33,7 +33,7 @@ services:
       - ./lteco-panel:/var/www/html/lteco-panel:z
       - ./public-web:/var/www/html/public-web:z
       - ./database:/var/www/html/database:z
-      - /opt/backups/ltecobike:/opt/backups/ltecobike:z
+      - /opt/backups/lteco-erp:/opt/backups/lteco-erp:z
       - ./shared:/var/www/html/shared:z
       - ./src:/var/www/html/src:z
       - ./tests:/var/www/html/tests:z
@@ -41,8 +41,8 @@ services:
       - ./docker:/var/www/html/docker:ro,z
 
   ecommerce_worker:
-    image: ltecobike-panel
-    container_name: ltecobike_ecommerce_worker
+    image: commerceops-system-panel
+    container_name: lteco_erp_ecommerce_worker
     depends_on:
       - panel
     extra_hosts:
