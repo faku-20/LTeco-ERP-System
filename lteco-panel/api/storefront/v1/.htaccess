@@ -1,0 +1,16 @@
+Options -Indexes -MultiViews
+RewriteEngine On
+RewriteRule ^catalog/?$ catalog.php [L,QSA]
+RewriteRule ^commercial-terms/?$ commercial-terms.php [L,QSA]
+RewriteRule ^reservations/?$ reservations.php [L,QSA]
+RewriteRule ^reservations/([0-9a-fA-F-]+)/?$ reservation.php?id=$1 [L,QSA]
+RewriteRule ^orders/?$ orders.php [L,QSA]
+RewriteRule ^orders/([0-9a-fA-F-]+)/simulate-payment/?$ order-simulated-payment.php?uuid=$1 [L,QSA]
+RewriteRule ^orders/([0-9a-fA-F-]+)/?$ order.php?uuid=$1 [L,QSA]
+RewriteRule ^privacy-requests/?$ privacy-requests.php [L,QSA]
+RewriteRule ^privacy-requests/([0-9a-fA-F-]+)/?$ privacy-request.php?uuid=$1 [L,QSA]
+RewriteRule ^visits/?$ visits.php [L,QSA]
+
+<FilesMatch "\.php$">
+    Require all granted
+</FilesMatch>

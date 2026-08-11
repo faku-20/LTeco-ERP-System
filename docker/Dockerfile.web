@@ -1,0 +1,27 @@
+FROM php:8.2-apache
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        libcurl4-openssl-dev \
+        libonig-dev \
+    && docker-php-ext-install -j"$(nproc)" mysqli pdo pdo_mysql mbstring curl \
+    && a2enmod rewrite \
+    && rm -rf /var/lib/apt/lists/*
+
+# Zona horaria de PHP alineada con la DB (Uruguay), igual que el contenedor panel.
+RUN { \
+    echo "date.timezone = America/Montevideo"; \
+    echo "upload_max_filesize = 20M"; \
+    echo "post_max_size = 25M"; \
+    echo "memory_limit = 256M"; \
+    echo "display_errors = Off"; \
+    echo "display_startup_errors = Off"; \
+    echo "log_errors = On"; \
+    echo "html_errors = Off"; \
+    echo "expose_php = Off"; \
+    echo "error_log = /proc/self/fd/2"; \
+} > "$PHP_INI_DIR/conf.d/ltecobike.ini"
+
+COPY docker/apache-web.conf /etc/apache2/sites-available/000-default.conf
+
+WORKDIR /var/www/html

@@ -1,0 +1,53 @@
+sequenceDiagram
+    autonumber
+    actor U as Admin
+    participant A as ventas/anular.php
+    participant Auth as includes/auth.php
+    participant S as VentaAnulacionService
+    participant R as VentaAnulacionRepository
+    participant RA as ReglasAnulacion
+    participant Res as ResultadoAnulacion
+    participant DB as MySQL
+    participant Audit as registrarAuditoria()
+
+    U->>A: POST id venta + motivo
+    A->>Auth: requiereAdmin(), CSRF
+    A->>DB: beginTransaction()
+    A->>S: anular(idVenta, motivo, idUsuario, usuario)
+    S->>R: bloquearVenta(idVenta)
+    R->>DB: SELECT venta FOR UPDATE
+    S->>R: detalles(idVenta)
+    R->>DB: SELECT venta_detalle
+    loop cada detalle
+        S->>RA: esVehiculo(tipoProducto)
+        alt vehiculo y sin otra venta activa
+            S->>R: restaurarVehiculo(idProducto)
+            R->>DB: UPDATE producto/vehiculo disponible
+        else repuesto
+            S->>R: restaurarRepuesto(idProducto, cantidad)
+            R->>DB: UPDATE producto stock
+        end
+    end
+    alt venta tiene DistribuidorVendedorId y tabla distribuidor_stock
+        loop cada detalle
+            S->>R: restaurarStockDistribuidorVehiculo/Repuesto()
+            R->>DB: UPDATE distribuidor_stock
+        end
+    end
+    alt tabla remito disponible
+        S->>R: anularRemito(idVenta)
+        R->>DB: UPDATE remito
+    end
+    S->>R: anularVenta(idVenta, motivo, usuario)
+    R->>DB: UPDATE venta EstadoVenta='Anulada'
+    S->>R: columnaInfo(distribuidor_comision/gasto/garantia/service_vehiculo)
+    R->>DB: information_schema
+    S->>RA: requerirEstado()/estadoGastoAnulado()
+    S->>R: anularComisiones(), inactivarGastosComision(), anularGarantias(), cancelarServices()
+    R->>DB: UPDATE tablas asociadas
+    S-->>A: ResultadoAnulacion
+    A->>Res: paraAuditoria()
+    A->>Audit: ANULAR_VENTA
+    A->>DB: commit()
+    A-->>U: redirect ventas/detalle.php?ok=anulada
+    Note over A,S: Si falla cualquier paso, anular.php hace rollback.

@@ -1,0 +1,234 @@
+classDiagram
+    namespace Domain_Venta {
+        class ConfiguracionComercial
+        class EstadoPago
+        class FacturaInterna
+        class ProductoVenta
+        class ReglasAnulacion
+        class ReglasComerciales
+        class ResultadoAnulacion
+        class SeleccionProductos
+    }
+
+    namespace Domain_Distribuidor {
+        class VentaDistribuidorCalculo
+    }
+
+    namespace Domain_Otros {
+        class BalanceCalculo
+        class DashboardCalculo
+        class BackupComando
+    }
+
+    namespace Application {
+        class AuditoriaConsultaService
+        class AuditoriaEscrituraService
+        class BalanceService
+        class BusquedaService
+        class ClienteConsultaService
+        class ClienteCrudService
+        class ConfiguracionService
+        class DashboardService
+        class DistribuidorConsultaService
+        class DistribuidorCrudService
+        class DistribuidorCuentaService
+        class DistribuidorPedidoService
+        class DistribuidorReporteService
+        class DistribuidorStockService
+        class DistribuidorVentaService
+        class GastoConsultaService
+        class GastoCrudService
+        class ImportacionConsultaService
+        class ImportacionCrudService
+        class PostventaConsultaService
+        class PostventaIntervencionService
+        class PostventaService
+        class RepuestoConsultaService
+        class RepuestoCrudService
+        class SeguridadService
+        class UsuarioConsultaService
+        class UsuarioCrudService
+        class UsuarioMfaService
+        class VehiculoConsultaService
+        class VehiculoCrearService
+        class VehiculoEditarService
+        class VehiculoEstadoService
+        class VehiculoImagenService
+        class VehiculoListadoService
+        class VentaAnulacionService
+        class VentaCommercialService
+        class VentaCreateFormService
+        class VentaLineasService
+        class VentaListadoFiltros
+        class VentaListadoService
+        class VentaPersistenceData
+        class VentaPersistenceService
+        class VentaQueryService
+        class WhatsappService
+    }
+
+    namespace Infrastructure {
+        class Connection
+        class AuditoriaEscrituraRepository
+        class AuditoriaRepository
+        class BalanceRepository
+        class BusquedaRepository
+        class ClienteConsultaRepository
+        class ClienteCrudRepository
+        class ConfiguracionRepository
+        class DashboardRepository
+        class DistribuidorConsultaRepository
+        class DistribuidorCrudRepository
+        class DistribuidorCuentaRepository
+        class DistribuidorPedidoRepository
+        class DistribuidorReporteRepository
+        class DistribuidorStockRepository
+        class DistribuidorVentaRepository
+        class GastoConsultaRepository
+        class GastoCrudRepository
+        class ImportacionConsultaRepository
+        class ImportacionCrudRepository
+        class PostventaConsultaRepository
+        class PostventaRepository
+        class RepuestoConsultaRepository
+        class RepuestoCrudRepository
+        class SchemaRepository
+        class SeguridadRepository
+        class UsuarioRepository
+        class VehiculoConsultaRepository
+        class VehiculoListadoRepository
+        class VehiculoRepository
+        class VentaAnulacionRepository
+        class VentaCommercialRepository
+        class VentaCreateFormRepository
+        class VentaListadoRepository
+        class VentaReadRepository
+        class VentaRepository
+        class WhatsappRepository
+    }
+
+    namespace Support {
+        class Cedula
+        class InputNormalizer
+        class Phone
+        class VentaView
+    }
+
+    namespace Lteco_Panel {
+        class panel_ventas_guardar_php {
+            <<endpoint>>
+        }
+        class panel_ventas_anular_php {
+            <<endpoint>>
+        }
+        class panel_ventas_crear_php {
+            <<endpoint>>
+        }
+        class panel_ventas_index_php {
+            <<endpoint>>
+        }
+        class panel_ventas_detalle_php {
+            <<endpoint>>
+        }
+        class panel_distribuidores_nueva_venta_php {
+            <<endpoint>>
+        }
+        class panel_postventa_index_php {
+            <<endpoint>>
+        }
+        class panel_postventa_detalle_php {
+            <<endpoint>>
+        }
+        class panel_postventa_intervencion_guardar_php {
+            <<endpoint>>
+        }
+        class panel_vehiculos_service_realizar_php {
+            <<endpoint>>
+        }
+        class panel_cron_whatsapp_services_php {
+            <<endpoint>>
+        }
+        class panel_includes_whatsapp_php {
+            <<support_functions>>
+        }
+    }
+
+    AuditoriaConsultaService --> AuditoriaRepository
+    AuditoriaEscrituraService --> AuditoriaEscrituraRepository
+    BalanceService --> BalanceRepository
+    BusquedaService --> BusquedaRepository
+    ClienteConsultaService --> ClienteConsultaRepository
+    ClienteCrudService --> ClienteCrudRepository
+    ConfiguracionService --> ConfiguracionRepository
+    DashboardService --> DashboardRepository
+    DistribuidorConsultaService --> DistribuidorConsultaRepository
+    DistribuidorCrudService --> DistribuidorCrudRepository
+    DistribuidorCuentaService --> DistribuidorCuentaRepository
+    DistribuidorPedidoService --> DistribuidorPedidoRepository
+    DistribuidorReporteService --> DistribuidorReporteRepository
+    DistribuidorStockService --> DistribuidorStockRepository
+    DistribuidorVentaService --> DistribuidorVentaRepository
+    DistribuidorVentaService --> VentaLineasService
+    GastoConsultaService --> GastoConsultaRepository
+    GastoCrudService --> GastoCrudRepository
+    ImportacionConsultaService --> ImportacionConsultaRepository
+    ImportacionCrudService --> ImportacionCrudRepository
+    PostventaConsultaService --> PostventaConsultaRepository
+    PostventaIntervencionService --> PostventaRepository
+    PostventaService --> PostventaRepository
+    RepuestoConsultaService --> RepuestoConsultaRepository
+    RepuestoCrudService --> RepuestoCrudRepository
+    SeguridadService --> SeguridadRepository
+    UsuarioConsultaService --> UsuarioRepository
+    UsuarioCrudService --> UsuarioRepository
+    UsuarioMfaService --> UsuarioRepository
+    VehiculoConsultaService --> VehiculoConsultaRepository
+    VehiculoCrearService --> VehiculoRepository
+    VehiculoEditarService --> VehiculoRepository
+    VehiculoEstadoService --> VehiculoRepository
+    VehiculoImagenService --> VehiculoRepository
+    VehiculoListadoService --> VehiculoListadoRepository
+    VentaAnulacionService --> VentaAnulacionRepository
+    VentaCommercialService --> VentaCommercialRepository
+    VentaCreateFormService --> VentaCreateFormRepository
+    VentaCreateFormService --> VentaCommercialService
+    VentaLineasService --> VentaPersistenceService
+    VentaLineasService --> VehiculoRepository
+    VentaLineasService --> PostventaRepository
+    VentaListadoService --> VentaListadoRepository
+    VentaPersistenceService --> VentaRepository
+    VentaQueryService --> VentaReadRepository
+    WhatsappService --> WhatsappRepository
+
+    VentaCommercialService ..> ConfiguracionComercial
+    VentaAnulacionService ..> ReglasAnulacion
+    VentaAnulacionService ..> ResultadoAnulacion
+    VentaPersistenceData ..> FacturaInterna : relacion inferida por datos de venta
+    VentaLineasService ..> ProductoVenta : relacion inferida por flujo de venta
+    DistribuidorVentaService ..> VentaDistribuidorCalculo
+    EstadoPago ..> InputNormalizer
+    SeleccionProductos ..> InputNormalizer
+
+    Connection --> PDO
+    AuditoriaRepository --> Connection
+    VentaRepository --> Connection
+    PostventaRepository --> Connection
+    WhatsappRepository --> Connection
+
+    panel_ventas_guardar_php ..> VentaPersistenceService
+    panel_ventas_guardar_php ..> VentaLineasService
+    panel_ventas_guardar_php ..> VentaCommercialService
+    panel_ventas_guardar_php ..> ClienteCrudService
+    panel_ventas_guardar_php ..> GastoCrudService
+    panel_ventas_guardar_php ..> SeleccionProductos
+    panel_ventas_guardar_php ..> ReglasComerciales
+    panel_ventas_guardar_php ..> EstadoPago
+    panel_ventas_guardar_php ..> FacturaInterna
+    panel_ventas_anular_php ..> VentaAnulacionService
+    panel_distribuidores_nueva_venta_php ..> DistribuidorVentaService
+    panel_postventa_index_php ..> PostventaConsultaService
+    panel_postventa_detalle_php ..> PostventaConsultaService
+    panel_postventa_intervencion_guardar_php ..> PostventaIntervencionService
+    panel_vehiculos_service_realizar_php ..> PostventaService
+    panel_cron_whatsapp_services_php ..> WhatsappService
+    panel_includes_whatsapp_php ..> WhatsappService

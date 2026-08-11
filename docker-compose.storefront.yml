@@ -1,0 +1,64 @@
+services:
+  storefront_php:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.storefront-php
+    image: ltecobike-storefront-php:dev
+    container_name: ltecobike_storefront_php
+    env_file:
+      - ./storefront/.env
+    restart: unless-stopped
+    volumes:
+      - storefront_storage:/var/www/html/storage
+      - storefront_bootstrap_cache:/var/www/html/bootstrap/cache
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - php-fpm -t || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  storefront_nginx:
+    image: nginx:alpine
+    container_name: ltecobike_storefront_nginx
+    depends_on:
+      storefront_php:
+        condition: service_healthy
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8082:80"
+    volumes:
+      - ./storefront/public:/var/www/html/public:ro,z
+      - ./docker/nginx-storefront.conf:/etc/nginx/conf.d/default.conf:ro,z
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -q --spider http://127.0.0.1/up || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  storefront_scheduler:
+    image: ltecobike-storefront-php:dev
+    container_name: ltecobike_storefront_scheduler
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      storefront_php:
+        condition: service_healthy
+    env_file:
+      - ./storefront/.env
+    restart: unless-stopped
+    command: ["php", "artisan", "schedule:work"]
+    volumes:
+      - storefront_storage:/var/www/html/storage
+      - storefront_bootstrap_cache:/var/www/html/bootstrap/cache
+
+volumes:
+  storefront_storage:
+  storefront_bootstrap_cache:

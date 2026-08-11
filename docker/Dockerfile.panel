@@ -1,0 +1,41 @@
+FROM composer:2 AS vendor
+
+WORKDIR /app
+COPY composer.json composer.lock ./
+COPY src ./src
+RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+
+FROM php:8.2-apache
+
+COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        default-mysql-client \
+        libcurl4-openssl-dev \
+        libonig-dev \
+    && docker-php-ext-install -j"$(nproc)" mysqli pdo pdo_mysql mbstring curl \
+    && a2enmod rewrite headers \
+    && rm -rf /var/lib/apt/lists/*
+
+# Zona horaria de PHP alineada con la DB (Uruguay). Aplica tanto a Apache como al
+# CLI (tests de integración, crons), que de otro modo caen al default UTC y se
+# desfasan con NOW()/CURDATE() de la base al cruzar medianoche.
+RUN { \
+    echo "date.timezone = America/Montevideo"; \
+    echo "upload_max_filesize = 20M"; \
+    echo "post_max_size = 25M"; \
+    echo "memory_limit = 256M"; \
+    echo "display_errors = Off"; \
+    echo "display_startup_errors = Off"; \
+    echo "log_errors = On"; \
+    echo "html_errors = Off"; \
+    echo "expose_php = Off"; \
+    echo "error_log = /proc/self/fd/2"; \
+} > "$PHP_INI_DIR/conf.d/ltecobike.ini"
+
+COPY docker/apache-panel.conf /etc/apache2/sites-available/000-default.conf
+COPY docker/apache-mpm-prefork.conf /etc/apache2/mods-available/mpm_prefork.conf
+
+WORKDIR /var/www/html
+COPY --from=vendor /app/vendor ./vendor

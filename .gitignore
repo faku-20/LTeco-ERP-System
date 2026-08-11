@@ -1,0 +1,78 @@
+# Logs
+logs/
+storage/logs/
+lteco-panel/logs/
+
+# Uploads
+lteco-panel/uploads/
+
+# Backups
+*.sql
+!database/migrations/
+!database/migrations/*.sql
+!database/baseline/
+!database/baseline/*.sql
+backups/
+deletion-backups/
+
+# Entornos
+.env
+.env.*
+
+# Git
+.git/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Dependencias
+vendor/
+node_modules/
+!lteco-panel/assets/vendor/
+!lteco-panel/assets/vendor/**
+
+# Temporales
+*.tmp
+*.bak
+!.env.example
+storage/logs/*.log
+lteco-panel/logs/*.log
+lteco-panel/configuracion/mantenimiento/backups/
+*.sql.gz
+
+# Backups temporales locales
+*.bak
+*.bak_*
+*.backup
+*_backup
+# Archivos subidos por usuarios / datos operativos
+lteco-panel/uploads/**
+!lteco-panel/uploads/
+!lteco-panel/uploads/.gitkeep
+!lteco-panel/uploads/.htaccess
+!lteco-panel/uploads/vehiculos/
+!lteco-panel/uploads/vehiculos/.gitkeep
+!lteco-panel/uploads/vehiculos/.htaccess
+lteco-panel.backup-*/
+.gstack/
+
+# Claude / Ruflo local files
+.claude/
+.claude-flow/
+.swarm/
+docs/diagramas/*.png
+
+# Local agent artifacts: not required by Ltecobike runtime
+ventoagent
+ventoagent.log
+
+# Configuración local sensible
+/config.json
+
+# Estado operativo generado en runtime
+/lteco-panel/storage/operational/

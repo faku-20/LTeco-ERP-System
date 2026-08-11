@@ -1,0 +1,144 @@
+classDiagram
+    class panel_ventas_crear_php {
+        <<endpoint>>
+        formulario alta venta
+    }
+    class panel_ventas_guardar_php {
+        <<endpoint>>
+        crea venta
+        administra transaccion PDO
+    }
+    class panel_ventas_anular_php {
+        <<endpoint>>
+        anula venta
+        administra transaccion PDO
+    }
+    class panel_ventas_detalle_php {
+        <<endpoint>>
+        consulta detalle
+    }
+    class panel_ventas_whatsapp_reenviar_php {
+        <<endpoint>>
+        reenvia WhatsApp
+    }
+
+    class VentaCreateFormService {
+        +cargar(idUsuario, esVendedor, tasaIvaDefault) array
+    }
+    class VentaCommercialService {
+        +configuracion(tasaIvaDefault) array
+        +configuracionFormulario(tasaIvaDefault) array
+        +comisionVendedor(idUsuario) float
+        +comisionDistribuidor(idDistribuidor, default) float
+        +usuarioInternoDistribuidor(rolDistribuidor) array
+    }
+    class VentaPersistenceService {
+        +crearCabecera(datos) int
+        +agregarDetalle(datos) int
+        +asignarNumeroFactura(idVenta, numeroFactura) void
+        +cerrarVenta(idVenta, datos) void
+    }
+    class VentaLineasService {
+        +registrarVehiculo(linea) int
+        +aplicarEfectosVehiculo(idVehiculo, idVenta, clienteId, idProducto) void
+        +registrarRepuesto(linea) int
+        +bloquearVehiculo(idVehiculo) array|null
+        +bloquearRepuesto(idRepuesto) array|null
+    }
+    class VentaAnulacionService {
+        +anular(idVenta, motivo, idUsuario, usuarioAnulacion) ResultadoAnulacion
+    }
+    class VentaQueryService {
+        +ventaConCliente(idVenta) array|null
+        +detalles(idVenta) array
+        +datosWhatsapp(idVenta) array
+        +garantiaYServices(idVenta, detalles) array
+    }
+    class VentaListadoService
+    class VentaListadoFiltros
+    class VentaPersistenceData
+
+    class VentaCreateFormRepository
+    class VentaCommercialRepository
+    class VentaRepository
+    class VentaAnulacionRepository
+    class VentaReadRepository
+    class VentaListadoRepository
+    class VehiculoRepository
+    class PostventaRepository
+    class ClienteCrudService
+    class GastoCrudService
+    class Connection
+
+    class ConfiguracionComercial {
+        +normalizar(fila, tasaIvaDefault) array
+        +paraFormulario(fila, tasaIvaDefault) array
+        +comisionNoNegativa(valor, default) float
+    }
+    class FacturaInterna {
+        +generar(idVenta, fechaVenta) string
+    }
+    class ProductoVenta {
+        +precioBase(producto, tipoCliente) float
+        +tipoCambio(producto, fallback, defaultSistema) float
+        +tipoCambioPromedio(pesoAcumulado, totalPonderado, fallback) float
+    }
+    class SeleccionProductos {
+        +vehiculos(payload) array
+        +repuestos(payload) array
+        +tieneProductos(vehiculos, repuestos) bool
+    }
+    class ReglasComerciales {
+        +calcular(in) array
+        +metodosContado() array
+        +ivaIncluido(totalConIVA, tasaIVA) float
+    }
+    class EstadoPago {
+        +resolver(total, montoPagadoIngresado) array
+    }
+    class ReglasAnulacion {
+        +esVehiculo(tipoProducto) bool
+        +requerirEstado(columnaInfo, tabla, estado) void
+        +estadoGastoAnulado(columnaInfo) string
+    }
+    class ResultadoAnulacion {
+        +productosRevertidos int
+        +comisionesAnuladas int
+        +gastosComisionInactivados int
+        +estadoGastoUsado string|null
+        +garantiasAnuladas int
+        +servicesCancelados int
+        +paraAuditoria() array
+    }
+
+    panel_ventas_crear_php ..> VentaCreateFormService
+    panel_ventas_guardar_php ..> VentaPersistenceService
+    panel_ventas_guardar_php ..> VentaLineasService
+    panel_ventas_guardar_php ..> VentaCommercialService
+    panel_ventas_guardar_php ..> ClienteCrudService
+    panel_ventas_guardar_php ..> GastoCrudService
+    panel_ventas_guardar_php ..> SeleccionProductos
+    panel_ventas_guardar_php ..> FacturaInterna
+    panel_ventas_guardar_php ..> ProductoVenta
+    panel_ventas_guardar_php ..> ReglasComerciales
+    panel_ventas_guardar_php ..> EstadoPago
+    panel_ventas_anular_php ..> VentaAnulacionService
+    panel_ventas_detalle_php ..> VentaQueryService : relacion inferida
+    panel_ventas_whatsapp_reenviar_php ..> VentaQueryService
+
+    VentaCreateFormService --> VentaCreateFormRepository
+    VentaCreateFormService --> VentaCommercialService
+    VentaCommercialService --> VentaCommercialRepository
+    VentaCommercialService ..> ConfiguracionComercial
+    VentaPersistenceService --> VentaRepository
+    VentaPersistenceService ..> VentaPersistenceData
+    VentaLineasService --> Connection
+    VentaLineasService --> VentaPersistenceService
+    VentaLineasService --> VehiculoRepository
+    VentaLineasService --> PostventaRepository
+    VentaAnulacionService --> VentaAnulacionRepository
+    VentaAnulacionService ..> ReglasAnulacion
+    VentaAnulacionService ..> ResultadoAnulacion
+    VentaQueryService --> VentaReadRepository
+    VentaListadoService --> VentaListadoRepository
+    VentaListadoService ..> VentaListadoFiltros : relacion inferida

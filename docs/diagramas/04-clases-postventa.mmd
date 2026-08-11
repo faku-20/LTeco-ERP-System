@@ -1,0 +1,107 @@
+classDiagram
+    class panel_postventa_index_php {
+        <<endpoint>>
+        listado y filtros
+    }
+    class panel_postventa_detalle_php {
+        <<endpoint>>
+        detalle vehiculo postventa
+    }
+    class panel_postventa_intervencion_guardar_php {
+        <<endpoint>>
+        guarda intervencion tecnica
+        administra transaccion PDO
+    }
+    class panel_vehiculos_service_realizar_php {
+        <<endpoint>>
+        marca service realizado
+        administra transaccion PDO
+    }
+    class panel_postventa_service_cancelar_php {
+        <<endpoint>>
+        cancela service
+    }
+    class panel_postventa_service_observacion_agregar_php {
+        <<endpoint>>
+        agrega observacion
+    }
+    class panel_postventa_actualizar_estados_php {
+        <<endpoint>>
+        vence garantias/services
+    }
+    class panel_postventa_marcar_notificado_wa_php {
+        <<endpoint>>
+        registra recordatorio WhatsApp
+    }
+
+    class PostventaConsultaService {
+        +listado(filtros, idUsuarioVendedor) array
+        +detalle(idVehiculo, idUsuarioVendedor) array|null
+    }
+    class PostventaIntervencionService {
+        +guardarIntervencion(idVehiculo, idVenta, idCliente, idService, diagnostico, solucion, tecnico, estado, observaciones, idRepuesto, cantidadRepuesto, idUsuarioRegistra) int
+    }
+    class PostventaService {
+        +realizarService(idService, idVehiculo, observaciones, usuario) array
+        +cancelarService(idService, idVehiculo, motivo, usuario) array
+        +agregarObservacion(idService, idVehiculo, nota, usuario) array
+        +actualizarEstados(idUsuarioVendedor, incluirGarantias) void
+        +servicesParaNotificar() array
+        +vendedorPuedeIntervenir(idVehiculo, idVenta, idUsuario) bool
+        +marcarNotificadoWa(idService, idVehiculo, usuario) void
+    }
+
+    class PostventaConsultaRepository {
+        +listadoMotos(q, estadoService, garantia, idUsuarioVendedor) array
+        +recordatoriosWhatsApp(idUsuarioVendedor) array
+        +metricas(idUsuarioVendedor) array
+        +vehiculoConVenta(idVehiculo, idUsuarioVendedor) array|null
+        +servicesDeVenta(idVehiculo, idVenta) array
+        +historialDeVenta(idVehiculo, idVenta) array
+        +historialTecnico(idVehiculo, idVenta) array
+        +repuestosUsados(idsHistorial) array
+        +repuestosDisponibles() array
+    }
+    class PostventaRepository {
+        +generarGarantia(idVehiculo, idVenta, clienteId) void
+        +generarServices(idVehiculo, idVenta, clienteId) void
+        +buscarServiceParaRealizar(idService, idVehiculo) array|null
+        +marcarServiceRealizado(idService, idVehiculo, observaciones) int
+        +registrarHistorial(idService, idVehiculo, tipo, detalle, usuario) void
+        +cancelarService(idService, idVehiculo, motivo) int
+        +agregarObservacionService(idService, idVehiculo, nota) int
+        +insertarIntervencion() int
+        +buscarRepuestoParaConsumo(idRepuesto) array|null
+        +descontarStockProducto(idProducto, cantidad) void
+        +registrarRepuestoUsado() void
+    }
+    class VentaLineasService {
+        +aplicarEfectosVehiculo(idVehiculo, idVenta, clienteId, idProducto) void
+    }
+    class VentaAnulacionService {
+        +anular(idVenta, motivo, idUsuario, usuarioAnulacion) ResultadoAnulacion
+    }
+    class WhatsappService {
+        +servicesParaRecordatorio(desde, hasta) array
+        +serviceYaNotificado(idService) bool
+    }
+    class Connection
+
+    panel_postventa_index_php ..> PostventaConsultaService
+    panel_postventa_detalle_php ..> PostventaConsultaService
+    panel_postventa_intervencion_guardar_php ..> PostventaIntervencionService
+    panel_vehiculos_service_realizar_php ..> PostventaService
+    panel_postventa_service_cancelar_php ..> PostventaService
+    panel_postventa_service_observacion_agregar_php ..> PostventaService
+    panel_postventa_actualizar_estados_php ..> PostventaService
+    panel_postventa_marcar_notificado_wa_php ..> PostventaService
+
+    PostventaConsultaService --> PostventaConsultaRepository
+    PostventaIntervencionService --> PostventaRepository
+    PostventaService --> PostventaRepository
+    PostventaConsultaRepository --> Connection
+    PostventaRepository --> Connection
+
+    VentaLineasService ..> PostventaRepository : genera garantia y services al vender moto
+    VentaAnulacionService ..> PostventaRepository : relacion inferida por anular garantias/services via repository de ventas
+    WhatsappService ..> PostventaService : relacion inferida por recordatorios service

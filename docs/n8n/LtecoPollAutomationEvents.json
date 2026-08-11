@@ -1,0 +1,171 @@
+[
+  {
+    "updatedAt": "2026-07-11T02:14:40.000Z",
+    "createdAt": "2026-06-30T20:27:53.183Z",
+    "id": "LtecoPollAutomationEvents",
+    "name": "Ltecobike - Poll automation events",
+    "description": null,
+    "active": false,
+    "isArchived": false,
+    "nodes": [
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "minutes",
+                "minutesInterval": 1
+              }
+            ]
+          }
+        },
+        "id": "schedule",
+        "name": "Every 5 minutes",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.2,
+        "position": [
+          220,
+          220
+        ]
+      },
+      {
+        "parameters": {
+          "url": "https://panel.ltecobike.shop/lteco-panel/api/n8n/events.php?limit=20",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "X-Lteco-N8n-Token",
+                "value": "={{ $env.LTECO_N8N_WEBHOOK_TOKEN }}"
+              }
+            ]
+          }
+        },
+        "id": "get-events",
+        "name": "Get pending events",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          500,
+          220
+        ]
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "events"
+        },
+        "id": "split-events",
+        "name": "Split events",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          760,
+          220
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "return items.filter(item => ['visita_agendada', 'visita_hora_confirmada'].includes(item.json.EventKey));"
+        },
+        "id": "filter-visit-events",
+        "name": "Filter visit events",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1010,
+          220
+        ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://panel.ltecobike.shop/lteco-panel/api/n8n/push_event.php",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "X-Lteco-N8n-Token",
+                "value": "={{ $env.LTECO_N8N_WEBHOOK_TOKEN }}"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ { id_event: $json.IdEvent } }}",
+          "options": {}
+        },
+        "id": "send-web-push",
+        "name": "Send Android push",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1260,
+          220
+        ]
+      }
+    ],
+    "connections": {
+      "Every 5 minutes": {
+        "main": [
+          [
+            {
+              "node": "Get pending events",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get pending events": {
+        "main": [
+          [
+            {
+              "node": "Split events",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Split events": {
+        "main": [
+          [
+            {
+              "node": "Filter visit events",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Filter visit events": {
+        "main": [
+          [
+            {
+              "node": "Send Android push",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "executionOrder": "v1"
+    },
+    "staticData": null,
+    "meta": null,
+    "nodeGroups": [],
+    "pinData": null,
+    "versionId": "6ca3f241-fd87-4204-9ddf-c2c93a2a1308",
+    "activeVersionId": "6ca3f241-fd87-4204-9ddf-c2c93a2a1308",
+    "versionCounter": 4,
+    "triggerCount": 1,
+    "sourceWorkflowId": null,
+    "tags": [],
+    "versionMetadata": {
+      "name": null,
+      "description": null
+    }
+  }
+]

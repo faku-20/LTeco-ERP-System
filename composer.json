@@ -1,0 +1,19 @@
+{
+    "name": "ltecobike/ltecobike",
+    "description": "Sistema de gestión comercial Ltecobike (panel interno y web pública).",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.2",
+        "minishlink/web-push": "^10.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lteco\\": "src/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}

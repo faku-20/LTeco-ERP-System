@@ -1,0 +1,78 @@
+sequenceDiagram
+    autonumber
+    actor U as Usuario panel
+    participant G as ventas/guardar.php
+    participant Auth as includes/auth.php
+    participant VC as VentaCommercialService
+    participant CC as ClienteCrudService
+    participant VP as VentaPersistenceService
+    participant VL as VentaLineasService
+    participant RC as ReglasComerciales
+    participant EP as EstadoPago
+    participant GC as GastoCrudService
+    participant WA as includes/whatsapp.php
+    participant WR as WhatsappService/WhatsappRepository
+    participant DB as MySQL
+    participant Meta as Meta Graph API
+    participant Audit as registrarAuditoria()
+
+    U->>G: POST crear venta
+    G->>Auth: requiereModulo("ventas"), CSRF
+    G->>VC: configuracion(), comisionVendedor()
+    VC->>DB: leer configuracion/comisiones
+    G->>G: normaliza cliente, moneda, pago, productos
+    G->>DB: beginTransaction()
+    alt cliente nuevo
+        G->>CC: crear(datos cliente)
+        CC->>DB: INSERT cliente
+        G->>Audit: CREAR_CLIENTE
+    else cliente existente
+        G->>CC: existe(clienteId)
+        CC->>DB: SELECT cliente
+    end
+    G->>VP: crearCabecera(datos)
+    VP->>DB: INSERT venta
+    G->>VP: asignarNumeroFactura()
+    VP->>DB: UPDATE venta NumeroFactura
+    loop vehiculos seleccionados
+        G->>VL: bloquearVehiculo()
+        VL->>DB: SELECT FOR UPDATE producto/vehiculo
+        G->>G: ProductoVenta::precioBase/tipoCambio
+        G->>VL: registrarVehiculo(linea)
+        VL->>VP: agregarDetalle()
+        VP->>DB: INSERT venta_detalle
+        VL->>DB: UPDATE producto/vehiculo
+        VL->>DB: INSERT/asegura garantia y service_vehiculo
+    end
+    loop repuestos solicitados
+        G->>VL: bloquearRepuesto()
+        VL->>DB: SELECT FOR UPDATE producto/repuesto
+        G->>VL: registrarRepuesto(linea)
+        VL->>VP: agregarDetalle()
+        VP->>DB: INSERT venta_detalle
+        VL->>DB: UPDATE producto stock/estado
+    end
+    G->>RC: calcular(importes, comisiones, IVA)
+    RC-->>G: totales, IVA, ganancia, comisiones
+    G->>EP: resolver(total, monto_pagado)
+    EP-->>G: montoPagado, saldo, estadoVenta
+    G->>VP: cerrarVenta(idVenta, totales)
+    VP->>DB: UPDATE venta
+    G->>GC: registrarComisionesVenta()
+    GC->>DB: INSERT gastos de comision
+    G->>DB: commit()
+    Note over G,WA: Envio WhatsApp queda fuera de la transaccion
+    G->>WA: whatsappObtenerConfig()
+    WA->>WR: configuracion()
+    WR->>DB: SELECT configuracion
+    alt WhatsApp habilitado
+        G->>VL: clienteWhatsapp(), garantiaFechaFinPorVenta(), serviceFechasProgramadasPorVenta()
+        VL->>DB: SELECT cliente/garantia/services
+        G->>WA: enviarWhatsAppTemplate()
+        WA->>Meta: POST /messages
+        WA->>WR: registrar(venta, idVenta, estado, respuesta)
+        WR->>DB: INSERT notificacion_whatsapp
+        WA->>Audit: WHATSAPP_ENVIADO/ERROR/OMITIDO
+    end
+    G->>Audit: CREAR_VENTA
+    G-->>U: redirect ventas/detalle.php

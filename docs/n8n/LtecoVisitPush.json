@@ -1,0 +1,111 @@
+[
+  {
+    "updatedAt": "2026-07-11T02:14:45.000Z",
+    "createdAt": "2026-07-11T02:14:35.631Z",
+    "id": "LtecoVisitPush",
+    "name": "Ltecobike - Android visit push",
+    "description": null,
+    "active": false,
+    "isArchived": false,
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "ltecobike-visit-push",
+          "responseMode": "lastNode",
+          "options": {}
+        },
+        "id": "visit-webhook",
+        "name": "Visit webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          260,
+          260
+        ],
+        "webhookId": "lteco-visit-push"
+      },
+      {
+        "parameters": {
+          "jsCode": "const secret = $json.headers?.['x-lteco-n8n-secret'] || ''; if (!secret || secret !== $env.LTECO_N8N_WEBHOOK_TOKEN) throw new Error('Webhook secret invalido'); const id = Number($json.body?.payload?.id_event || 0); if (!id) throw new Error('Evento invalido'); return [{ json: { id_event: id } }];"
+        },
+        "id": "validate-event",
+        "name": "Validate event",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          520,
+          260
+        ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://panel.ltecobike.shop/lteco-panel/api/n8n/push_event.php",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "X-Lteco-N8n-Token",
+                "value": "={{ $env.LTECO_N8N_WEBHOOK_TOKEN }}"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ { id_event: $json.id_event } }}",
+          "options": {}
+        },
+        "id": "send-push",
+        "name": "Send Android push",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          780,
+          260
+        ]
+      }
+    ],
+    "connections": {
+      "Visit webhook": {
+        "main": [
+          [
+            {
+              "node": "Validate event",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Validate event": {
+        "main": [
+          [
+            {
+              "node": "Send Android push",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "executionOrder": "v1"
+    },
+    "staticData": null,
+    "meta": null,
+    "nodeGroups": [],
+    "pinData": null,
+    "versionId": "bd9e1f81-4115-42fd-9c1a-f661433ddec7",
+    "activeVersionId": "bd9e1f81-4115-42fd-9c1a-f661433ddec7",
+    "versionCounter": 1,
+    "triggerCount": 1,
+    "sourceWorkflowId": null,
+    "tags": [],
+    "versionMetadata": {
+      "name": null,
+      "description": null
+    }
+  }
+]

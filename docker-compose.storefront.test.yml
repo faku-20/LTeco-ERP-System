@@ -1,0 +1,21 @@
+services:
+  storefront_test:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.storefront-test
+    image: ltecobike-storefront-test:local
+    environment:
+      APP_ENV: testing
+      APP_KEY: base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+      APP_DEBUG: "true"
+      DB_CONNECTION: sqlite
+      DB_DATABASE: ":memory:"
+      CATALOG_DB_CONNECTION: sqlite
+      CATALOG_DB_DATABASE: ":memory:"
+      CACHE_STORE: array
+      MAIL_MAILER: array
+      QUEUE_CONNECTION: sync
+      SESSION_DRIVER: array
+      STOREFRONT_ACCOUNTS_ENABLED: "false"
+      STOREFRONT_REGISTRATION_ENABLED: "false"
+    command: composer test

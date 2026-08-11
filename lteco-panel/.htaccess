@@ -1,0 +1,15 @@
+Options -Indexes
+
+<Files "sw.js">
+    Header always set Cache-Control "no-cache, no-store, must-revalidate"
+    Header always set Pragma "no-cache"
+    Header always set Expires "0"
+</Files>
+
+<Files "manifest.json">
+    Header always set Cache-Control "no-cache, no-store, must-revalidate"
+</Files>
+
+<FilesMatch "\.(sql|bak|backup|old|tmp|log)$">
+    Require all denied
+</FilesMatch>

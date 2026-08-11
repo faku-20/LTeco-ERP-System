@@ -1,0 +1,84 @@
+flowchart TD
+    user["Usuario panel"]
+    browser["Browser"]
+
+    subgraph panel["lteco-panel - endpoints PHP procedurales"]
+        auth["includes/auth.php"]
+        helpers["includes/helpers.php"]
+        ventas["ventas/*.php"]
+        distribuidores["distribuidores/*.php"]
+        postventa["postventa/*.php + vehiculos/service_realizar.php"]
+        catalogo["clientes / vehiculos / repuestos"]
+        backoffice["balance / gastos / importaciones / configuracion / usuarios / auditoria / busqueda / dashboard"]
+        cron["cron/whatsapp_services.php"]
+    end
+
+    subgraph presentation["src/Presentation/Panel"]
+        bootstrap["bootstrap.php"]
+        support["Support/db.php auth.php helpers.php auditoria.php whatsapp.php"]
+        views["View/Includes/header.php sidebar.php footer.php flash.php"]
+    end
+
+    subgraph application["src/Application - casos de uso"]
+        appVenta["Venta services"]
+        appDistribuidor["Distribuidor services"]
+        appPostventa["Postventa services"]
+        appCrud["Cliente/Vehiculo/Repuesto/Gasto/Importacion/Usuario/Configuracion services"]
+        appRead["Dashboard/Busqueda/Balance/Auditoria services"]
+        appWhatsapp["WhatsappService"]
+        appSeguridad["SeguridadService"]
+    end
+
+    subgraph domain["src/Domain - reglas puras"]
+        domVenta["Venta: ReglasComerciales, EstadoPago, ProductoVenta, SeleccionProductos, FacturaInterna, ReglasAnulacion, ResultadoAnulacion, ConfiguracionComercial"]
+        domDistribuidor["Distribuidor: VentaDistribuidorCalculo"]
+        domOtros["BalanceCalculo, DashboardCalculo, BackupComando"]
+    end
+
+    subgraph infra["src/Infrastructure"]
+        connection["Db/Connection"]
+        repos["Repository/*Repository"]
+    end
+
+    subgraph supportShared["src/Support"]
+        supportClasses["InputNormalizer, Phone, Cedula, VentaView"]
+    end
+
+    subgraph db["MySQL / MariaDB"]
+        tables["venta, venta_detalle, producto, vehiculo, cliente, garantia, service_vehiculo, service_historial, postventa_historial_tecnico, postventa_repuesto_usado, distribuidor, distribuidor_stock, distribuidor_comision, gasto, configuracion, notificacion_whatsapp, auditoria"]
+    end
+
+    subgraph external["Servicios externos"]
+        meta["Meta Graph API WhatsApp Cloud"]
+        mail["Mailer / notificaciones"]
+    end
+
+    user --> browser --> panel
+    panel --> presentation
+    panel --> application
+    panel --> domain
+    presentation --> application
+    application --> domain
+    application --> supportShared
+    application --> repos
+    repos --> connection --> db
+    support --> connection
+    appWhatsapp --> repos
+    support --> meta
+    cron --> appWhatsapp
+    ventas --> mail
+
+    ventas --> appVenta
+    ventas --> appCrud
+    ventas --> appWhatsapp
+    distribuidores --> appDistribuidor
+    distribuidores --> appCrud
+    postventa --> appPostventa
+    catalogo --> appCrud
+    backoffice --> appCrud
+    backoffice --> appRead
+    backoffice --> appSeguridad
+
+    appVenta --> domVenta
+    appDistribuidor --> domDistribuidor
+    appPostventa -. "relacion inferida: opera tablas generadas por venta" .-> domVenta

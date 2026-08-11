@@ -1,0 +1,14 @@
+.git
+.gitignore
+.env
+nuevo
+storefront/.env
+storefront/vendor
+storefront/storage/logs/*
+storefront/storage/framework/cache/*
+storefront/storage/framework/sessions/*
+storefront/storage/framework/views/*
+storefront/bootstrap/cache/*.php
+**/node_modules
+**/*.log
+design-qa.md

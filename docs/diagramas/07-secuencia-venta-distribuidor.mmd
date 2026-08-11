@@ -1,0 +1,61 @@
+sequenceDiagram
+    autonumber
+    actor D as Distribuidor
+    participant P as distribuidores/nueva_venta.php
+    participant Auth as distribuidores/_common.php
+    participant CC as ClienteCrudService
+    participant VC as VentaCommercialService
+    participant DS as DistribuidorVentaService
+    participant DR as DistribuidorVentaRepository
+    participant Calc as VentaDistribuidorCalculo
+    participant VL as VentaLineasService
+    participant DB as MySQL
+    participant Audit as registrarAuditoria()
+
+    D->>P: POST nueva venta de stock asignado
+    P->>Auth: requiereDistribuidorPanel(), CSRF
+    P->>VC: configuracion(), usuarioInternoDistribuidor()
+    VC->>DB: SELECT configuracion/usuario comision
+    P->>DB: beginTransaction()
+    P->>DS: prepararVenta(idStock, idDistribuidor, cantidad)
+    DS->>DR: bloquearStock(idStock, idDistribuidor)
+    DR->>DB: SELECT distribuidor_stock FOR UPDATE
+    DS-->>P: ventaPreparada
+    alt cliente nuevo
+        P->>CC: crear(datos cliente)
+        CC->>DB: INSERT cliente
+        P->>Audit: CREAR_CLIENTE origen distribuidor
+    else cliente existente
+        P->>CC: obtener(clienteId)
+        CC->>DB: SELECT cliente
+    end
+    P->>DS: registrarVenta(preparada, clienteId, metodoPago, usuarioComision, observaciones, comisionVendedorPct, tasaIVA)
+    DS->>DR: buscarIdProductoVehiculo/Repuesto()
+    DR->>DB: SELECT producto
+    DS->>DR: obtenerComisionDistribuidorPct()
+    DR->>DB: SELECT distribuidor
+    DS->>Calc: calcular(precioVenta, precioMinimo, cantidad, comisiones, IVA)
+    Calc-->>DS: subtotal, costo, IVA, ganancia, comisiones
+    DS->>DR: crearVenta()
+    DR->>DB: INSERT venta
+    DS->>DR: crearDetalle()
+    DR->>DB: INSERT venta_detalle
+    DS->>DR: descontarStockDistribuidor()
+    DR->>DB: UPDATE distribuidor_stock
+    alt repuesto
+        DS->>DR: descontarStockGlobalRepuesto()
+        DR->>DB: UPDATE producto
+    else vehiculo
+        DS->>VL: aplicarEfectosVehiculo()
+        VL->>DB: UPDATE producto/vehiculo + INSERT garantia/services
+    end
+    P->>DS: registrarComisiones()
+    DS->>DR: registrarComisionDistribuidor(), crearGastoComision()
+    DR->>DB: INSERT distribuidor_comision/gasto
+    P->>DS: facturarRemito()
+    DS->>DR: facturarRemitoVehiculo/Repuesto()
+    DR->>DB: UPDATE remito
+    P->>Audit: VENTA_DISTRIBUIDOR
+    P->>DB: commit()
+    P-->>D: redirect distribuidores/ventas.php
+    Note over P,DS: relacion inferida: el endpoint conserva permisos, HTTP y transaccion; el service no abre/cierra transaccion.

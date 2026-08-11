@@ -1,0 +1,14 @@
+*
+!storefront/
+!storefront/**
+!docker/
+!docker/php-storefront.ini
+
+storefront/.env
+storefront/vendor
+storefront/node_modules
+storefront/database/*.sqlite
+storefront/storage/logs/*
+storefront/storage/framework/cache/data/*
+storefront/storage/framework/sessions/*
+storefront/storage/framework/views/*

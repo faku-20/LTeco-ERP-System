@@ -1,0 +1,122 @@
+CREATE TABLE IF NOT EXISTS ecommerce_cuenta (
+  IdCuenta BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  IdCliente INT NULL,
+  Correo VARCHAR(190) NOT NULL,
+  ClaveHash VARCHAR(255) NOT NULL,
+  Nombre VARCHAR(100) NOT NULL,
+  Telefono VARCHAR(30) NULL,
+  Estado ENUM('Activa','Bloqueada') NOT NULL DEFAULT 'Activa',
+  CorreoVerificadoEn DATETIME NULL,
+  UltimoAccesoEn DATETIME NULL,
+  CreadoEn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  ActualizadoEn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (IdCuenta),
+  UNIQUE KEY uq_ecommerce_cuenta_correo (Correo),
+  KEY idx_ecommerce_cuenta_cliente (IdCliente),
+  CONSTRAINT fk_ecommerce_cuenta_cliente FOREIGN KEY (IdCliente) REFERENCES cliente (IdCliente) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS ecommerce_direccion (
+  IdDireccion BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  IdCuenta BIGINT UNSIGNED NOT NULL,
+  Etiqueta VARCHAR(60) NOT NULL DEFAULT 'Principal',
+  Direccion VARCHAR(255) NOT NULL,
+  Ciudad VARCHAR(100) NOT NULL,
+  Departamento VARCHAR(100) NOT NULL,
+  CodigoPostal VARCHAR(20) NULL,
+  Referencias VARCHAR(255) NULL,
+  EsPrincipal TINYINT(1) NOT NULL DEFAULT 0,
+  CreadoEn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (IdDireccion),
+  KEY idx_ecommerce_direccion_cuenta (IdCuenta),
+  CONSTRAINT fk_ecommerce_direccion_cuenta FOREIGN KEY (IdCuenta) REFERENCES ecommerce_cuenta (IdCuenta) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS ecommerce_pedido (
+  IdPedido BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  NumeroPedido VARCHAR(32) NOT NULL,
+  TokenPublico CHAR(64) NOT NULL,
+  IdCuenta BIGINT UNSIGNED NULL,
+  IdCliente INT NULL,
+  Estado ENUM('PendientePago','PagoEnRevision','Pagado','Preparando','Listo','Entregado','Cancelado','Vencido') NOT NULL DEFAULT 'PendientePago',
+  EstadoPago ENUM('Pendiente','EnProceso','Aprobado','Rechazado','Reembolsado','Cancelado') NOT NULL DEFAULT 'Pendiente',
+  Nombre VARCHAR(100) NOT NULL,
+  Apellido VARCHAR(100) NOT NULL,
+  Correo VARCHAR(190) NOT NULL,
+  Telefono VARCHAR(30) NOT NULL,
+  Cedula VARCHAR(40) NULL,
+  Entrega ENUM('Retiro','Envio') NOT NULL DEFAULT 'Retiro',
+  Direccion VARCHAR(255) NULL,
+  Ciudad VARCHAR(100) NULL,
+  Departamento VARCHAR(100) NULL,
+  CodigoPostal VARCHAR(20) NULL,
+  Notas VARCHAR(500) NULL,
+  Moneda ENUM('UYU','USD') NOT NULL DEFAULT 'UYU',
+  Subtotal DECIMAL(12,2) NOT NULL,
+  CostoEnvio DECIMAL(12,2) NOT NULL DEFAULT 0,
+  Total DECIMAL(12,2) NOT NULL,
+  ProveedorPago VARCHAR(40) NOT NULL DEFAULT 'mercadopago',
+  ExpiraEn DATETIME NOT NULL,
+  PagadoEn DATETIME NULL,
+  IdVenta INT NULL,
+  CreadoEn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  ActualizadoEn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (IdPedido),
+  UNIQUE KEY uq_ecommerce_pedido_numero (NumeroPedido),
+  UNIQUE KEY uq_ecommerce_pedido_token (TokenPublico),
+  KEY idx_ecommerce_pedido_cuenta (IdCuenta, CreadoEn),
+  KEY idx_ecommerce_pedido_estado (Estado, ExpiraEn),
+  CONSTRAINT fk_ecommerce_pedido_cuenta FOREIGN KEY (IdCuenta) REFERENCES ecommerce_cuenta (IdCuenta) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT fk_ecommerce_pedido_cliente FOREIGN KEY (IdCliente) REFERENCES cliente (IdCliente) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT fk_ecommerce_pedido_venta FOREIGN KEY (IdVenta) REFERENCES venta (IdVenta) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS ecommerce_pedido_item (
+  IdItem BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  IdPedido BIGINT UNSIGNED NOT NULL,
+  IdVehiculo VARCHAR(10) NOT NULL,
+  IdProducto INT NOT NULL,
+  Modelo VARCHAR(100) NOT NULL,
+  Color VARCHAR(60) NULL,
+  PrecioUnitario DECIMAL(12,2) NOT NULL,
+  Cantidad SMALLINT UNSIGNED NOT NULL DEFAULT 1,
+  Total DECIMAL(12,2) NOT NULL,
+  PRIMARY KEY (IdItem),
+  UNIQUE KEY uq_ecommerce_item_vehiculo_activo (IdPedido, IdVehiculo),
+  KEY idx_ecommerce_item_vehiculo (IdVehiculo),
+  CONSTRAINT fk_ecommerce_item_pedido FOREIGN KEY (IdPedido) REFERENCES ecommerce_pedido (IdPedido) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_ecommerce_item_vehiculo FOREIGN KEY (IdVehiculo) REFERENCES vehiculo (IdVehiculo) ON UPDATE CASCADE,
+  CONSTRAINT fk_ecommerce_item_producto FOREIGN KEY (IdProducto) REFERENCES producto (IdProducto) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS ecommerce_pago (
+  IdPago BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  IdPedido BIGINT UNSIGNED NOT NULL,
+  Proveedor VARCHAR(40) NOT NULL,
+  IdExterno VARCHAR(190) NULL,
+  IdPreferencia VARCHAR(190) NULL,
+  Estado VARCHAR(40) NOT NULL DEFAULT 'pending',
+  Monto DECIMAL(12,2) NOT NULL,
+  Moneda VARCHAR(10) NOT NULL,
+  PayloadJson JSON NULL,
+  CreadoEn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  ActualizadoEn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (IdPago),
+  UNIQUE KEY uq_ecommerce_pago_externo (Proveedor, IdExterno),
+  KEY idx_ecommerce_pago_pedido (IdPedido),
+  CONSTRAINT fk_ecommerce_pago_pedido FOREIGN KEY (IdPedido) REFERENCES ecommerce_pedido (IdPedido) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS ecommerce_token (
+  IdToken BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  IdCuenta BIGINT UNSIGNED NOT NULL,
+  Tipo ENUM('VerificarCorreo','RestablecerClave') NOT NULL,
+  TokenHash CHAR(64) NOT NULL,
+  ExpiraEn DATETIME NOT NULL,
+  UsadoEn DATETIME NULL,
+  CreadoEn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (IdToken),
+  UNIQUE KEY uq_ecommerce_token_hash (TokenHash),
+  KEY idx_ecommerce_token_cuenta (IdCuenta, Tipo),
+  CONSTRAINT fk_ecommerce_token_cuenta FOREIGN KEY (IdCuenta) REFERENCES ecommerce_cuenta (IdCuenta) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

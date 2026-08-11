@@ -1,0 +1,52 @@
+sequenceDiagram
+    autonumber
+    participant Caller as ventas/guardar.php o ventas/whatsapp_reenviar.php o cron/whatsapp_services.php
+    participant WA as includes/whatsapp.php
+    participant WS as WhatsappService
+    participant WR as WhatsappRepository
+    participant DB as MySQL
+    participant Meta as Meta Graph API
+    participant Audit as registrarAuditoria()
+
+    Caller->>WA: whatsappObtenerConfig(PDO)
+    WA->>WS: configuracion(defaults)
+    WS->>WR: configuracion()
+    WR->>DB: SELECT configuracion WaEnabled/WaPhoneId/WaToken/templates
+    WR-->>WS: fila configuracion|null
+    WS-->>WA: cfg merged env + DB
+    alt cfg disabled
+        Caller->>WA: enviarWhatsAppTemplate(...)
+        WA->>WS: registrar(tipo, idRef, telefono, template, "omitido", "WhatsApp desactivado")
+        WS->>WR: registrar()
+        WR->>DB: INSERT notificacion_whatsapp
+        WA->>Audit: WHATSAPP_OMITIDO
+        WA-->>Caller: false
+    else credenciales/template faltantes
+        Caller->>WA: enviarWhatsAppTemplate(...)
+        WA->>WS: registrar(..., "omitido", "Credenciales no configuradas")
+        WS->>WR: registrar()
+        WR->>DB: INSERT notificacion_whatsapp
+        WA->>Audit: WHATSAPP_OMITIDO
+        WA-->>Caller: false
+    else habilitado
+        Caller->>WA: enviarWhatsAppTemplate(telefono, template, variables, tipo, idRef)
+        WA->>WA: whatsappFormatearTelefono()
+        alt telefono invalido
+            WA->>WS: registrar(..., "omitido", "Telefono invalido o vacio")
+            WS->>WR: registrar()
+            WR->>DB: INSERT notificacion_whatsapp
+            WA->>Audit: WHATSAPP_OMITIDO
+            WA-->>Caller: false
+        else telefono valido
+            WA->>WA: arma payload template y language
+            WA->>Meta: POST https://graph.facebook.com/v20.0/{phone_id}/messages
+            Meta-->>WA: HTTP 2xx o error JSON/cURL
+            WA->>WS: registrar(tipo, idRef, telefono normalizado, template, enviado/error, respuesta)
+            WS->>WR: registrar()
+            WR->>DB: INSERT notificacion_whatsapp
+            WA->>Audit: WHATSAPP_ENVIADO o WHATSAPP_ERROR
+            WA-->>Caller: bool success
+        end
+    end
+
+    Note over Caller,WA: Venta creada envia fuera de transaccion. Cron usa enviarWhatsAppTemplateConPdo().

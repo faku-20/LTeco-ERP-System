@@ -1,0 +1,3 @@
+ALTER TABLE ecommerce_cuenta
+  ADD COLUMN Apellido VARCHAR(100) NULL AFTER Nombre,
+  ADD COLUMN Cedula VARCHAR(40) NULL AFTER Telefono;

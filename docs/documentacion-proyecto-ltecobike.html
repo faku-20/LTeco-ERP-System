@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documentacion Proyecto Ltecobike</title>
+<style>
+@page {
+    size: A4;
+    margin: 18mm 17mm;
+}
+
+:root {
+    --ink: #1d1d1b;
+    --muted: #62625f;
+    --brand: #0f6b38;
+    --brand-dark: #0b3d2e;
+    --line: #d8d8d2;
+    --soft: #f6f3ec;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #e9e6dc;
+    color: var(--ink);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.48;
+}
+
+.page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto 16px;
+    padding: 24mm 22mm;
+    background: #fff;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .12);
+    page-break-after: always;
+}
+
+.page:last-child {
+    page-break-after: auto;
+}
+
+.cover {
+    display: flex;
+    min-height: 297mm;
+    flex-direction: column;
+    justify-content: center;
+    gap: 26px;
+}
+
+.cover-mark {
+    width: 116px;
+    height: auto;
+}
+
+.cover h1 {
+    margin: 0;
+    max-width: 680px;
+    color: var(--brand-dark);
+    font-size: 36px;
+    line-height: 1.08;
+    letter-spacing: 0;
+}
+
+.cover .subtitle {
+    max-width: 680px;
+    color: var(--muted);
+    font-family: "Times New Roman", Times, serif;
+    font-size: 21px;
+}
+
+.meta {
+    margin-top: 18px;
+    border-top: 2px solid var(--brand);
+    padding-top: 18px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.meta strong {
+    color: var(--ink);
+}
+
+.doc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.doc-header img {
+    width: 86px;
+}
+
+h2 {
+    margin: 0 0 16px;
+    color: var(--brand-dark);
+    font-size: 24px;
+    line-height: 1.16;
+}
+
+h3 {
+    margin: 22px 0 8px;
+    color: var(--brand-dark);
+    font-size: 17px;
+}
+
+p {
+    margin: 0 0 12px;
+}
+
+ul, ol {
+    margin: 8px 0 16px 22px;
+    padding: 0;
+}
+
+li {
+    margin: 4px 0;
+}
+
+.lead {
+    color: #333;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 18px;
+}
+
+.toc {
+    columns: 1;
+    list-style: none;
+    margin: 10px 0 0;
+}
+
+.toc li {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted #b9b9b2;
+    padding: 8px 0;
+    gap: 14px;
+}
+
+.toc span {
+    color: var(--muted);
+}
+
+.box {
+    margin: 16px 0;
+    border: 1px solid var(--line);
+    border-left: 5px solid var(--brand);
+    background: var(--soft);
+    padding: 14px 16px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 14px 0;
+}
+
+.card {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 12px;
+    background: #fff;
+}
+
+.card strong {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--brand-dark);
+}
+
+code {
+    padding: 1px 4px;
+    border-radius: 3px;
+    background: #f1f1ee;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: .92em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 13px;
+}
+
+th, td {
+    border: 1px solid var(--line);
+    padding: 8px;
+    vertical-align: top;
+}
+
+th {
+    background: var(--soft);
+    color: var(--brand-dark);
+    text-align: left;
+}
+
+.figure {
+    margin: 18px 0;
+    text-align: center;
+}
+
+.figure img {
+    max-width: 100%;
+    border: 1px solid var(--line);
+}
+
+.caption {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+@media print {
+    body {
+        background: #fff;
+    }
+
+    .page {
+        margin: 0;
+        box-shadow: none;
+    }
+}
+</style>
+</head>
+<body>
+
+<section class="page cover">
+    <img class="cover-mark" src="../public-web/assets/img/logo-header.png" alt="Ltecobike">
+    <div>
+        <h1>Documentacion final del sistema de gestion y plataforma web</h1>
+        <p class="subtitle">Proyecto independiente para la administracion operativa y comercial de Ltecobike.</p>
+    </div>
+    <div class="meta">
+        <p><strong>Emprendimiento:</strong> Ltecobike - Movilidad electrica</p>
+        <p><strong>Ubicacion de referencia:</strong> Montevideo, Uruguay</p>
+        <p><strong>Repositorio relevado:</strong> <code>/opt/ltecobike</code></p>
+        <p><strong>Version documental:</strong> 2.0 - 29/05/2026</p>
+    </div>
+</section>
+
+<section class="page">
+    <header class="doc-header">
+        <span>Ltecobike - Sistema de gestion y plataforma web</span>
+        <img src="../public-web/assets/img/logo-header.png" alt="Ltecobike">
+    </header>
+    <h2>Indice</h2>
+    <ol class="toc">
+        <li><strong>Resumen ejecutivo</strong><span>1</span></li>
+        <li><strong>Alcance del sistema</strong><span>2</span></li>
+        <li><strong>Arquitectura general</strong><span>3</span></li>
+        <li><strong>Modelo operativo</strong><span>4</span></li>
+        <li><strong>Modulos implementados</strong><span>5</span></li>
+        <li><strong>Roles y permisos</strong><span>6</span></li>
+        <li><strong>Ventas, comprobantes y verificacion</strong><span>7</span></li>
+        <li><strong>Web publica y catalogo</strong><span>8</span></li>
+        <li><strong>Seguridad y auditoria</strong><span>9</span></li>
+        <li><strong>Infraestructura y mantenimiento</strong><span>10</span></li>
+        <li><strong>Estado actual y pendientes</strong><span>11</span></li>
+    </ol>
+</section>
+
+<section class="page">
+    <header class="doc-header">
+        <span>1. Resumen ejecutivo</span>
+        <img src="../public-web/assets/img/logo-header.png" alt="Ltecobike">
+    </header>
+    <h2>Resumen ejecutivo</h2>
+    <p class="lead">Ltecobike es un emprendimiento orientado a la comercializacion y gestion de motos electricas urbanas. El sistema desarrollado centraliza la operacion diaria mediante un panel interno, una web publica de catalogo, trazabilidad comercial, control de stock y herramientas de postventa.</p>
+    <p>El objetivo principal del proyecto es profesionalizar la administracion del negocio, ordenar la informacion de vehiculos y repuestos, controlar ventas, gastos e importaciones, y sostener una presencia web coherente con la identidad comercial de la empresa.</p>
+    <p>La plataforma permite trabajar con roles diferenciados, registrar auditoria de operaciones relevantes, generar comprobantes verificables, administrar stock propio y de distribuidores, y mantener historial tecnico de servicios y garantias.</p>
+    <div class="box">
+        <strong>Resultado actual.</strong>
+        El sistema se encuentra operativo como panel de gestion, catalogo publico y base administrativa para ventas, stock, postventa, distribuidores y finanzas internas.
+    </div>
+</section>
+
+<section class="page">
+    <header class="doc-header">
+        <span>2. Alcance del sistema</span>
+        <img src="../public-web/assets/img/logo-header.png" alt="Ltecobike">
+    </header>
+    <h2>Alcance del sistema</h2>
+    <p>El sistema cubre la operacion comercial principal de Ltecobike. No se limita a un catalogo web, sino que integra gestion interna, seguimiento financiero, control de clientes, ventas y trazabilidad tecnica.</p>
+    <div class="grid">
+        <div class="card"><strong>Gestion interna</strong>Panel administrativo con login, roles, dashboard, buscador, vehiculos, repuestos, clientes, ventas, postventa, gastos, balance, importaciones y usuarios.</div>
+        <div class="card"><strong>Operacion comercial</strong>Registro de ventas, comprobantes, metodos de pago, descuentos, recargos, saldo pendiente, garantias y services asociados.</div>
+        <div class="card"><strong>Publicacion web</strong>Catalogo publico con vehiculos destacados, detalle de modelo, contacto y datos comerciales cargados desde configuracion.</div>
+        <div class="card"><strong>Distribuidores</strong>Panel especifico para stock asignado, pedidos, ventas propias, comisiones y estado de cuenta.</div>
+    </div>
+    <h3>Limites definidos</h3>
+    <p>La verificacion publica de comprobantes permanece como funcionalidad publica con token HMAC, aunque queda pendiente evaluar su separacion futura en un endpoint aislado. Las rutas legacy de etiquetas QR tambien quedan pendientes de revision antes de moverlas o eliminarlas.</p>
+</section>
+
+<section class="page">
+    <header class="doc-header">
+        <span>3. Arquitectura general</span>
+        <img src="../public-web/assets/img/logo-header.png" alt="Ltecobike">
+    </header>
+    <h2>Arquitectura general</h2>
+    <p>El proyecto esta organizado en tres areas principales: panel interno, web publica y codigo compartido. Esta separacion permite mantener aisladas las herramientas operativas de las pantallas publicas y reutilizar configuracion o reglas de dominio sin duplicacion innecesaria.</p>
+    <table>
+        <thead><tr><th>Area</th><th>Ruta</th><th>Funcion</th></tr></thead>
+        <tbody>
+            <tr><td>Panel interno</td><td><code>lteco-panel/</code></td><td>Gestion operativa con sesion, permisos y acciones administrativas.</td></tr>
+            <tr><td>Web publica</td><td><code>public-web/</code></td><td>Catalogo, contacto y verificacion publica de comprobantes.</td></tr>
+            <tr><td>Codigo compartido</td><td><code>shared/</code></td><td>Configuracion, conexion, reglas de vehiculos y token de comprobantes.</td></tr>
+            <tr><td>Base de datos</td><td><code>database/migrations/</code></td><td>Migraciones SQL incrementales.</td></tr>
+            <tr><td>Infraestructura</td><td><code>docker/</code></td><td>Configuracion Apache y servicios Docker.</td></tr>
+        </tbody>
+    </table>
+    <h3>Ordenamiento aplicado</h3>
+    <p>El scanner QR interno fue consolidado dentro del panel en <code>lteco-panel/vehiculos/scan.php</code>. Los endpoints publicos antiguos de scanner fueron eliminados de <code>public-web</code>, y el lector <code>html5-qrcode</code> queda solamente como dependencia del panel.</p>
+</section>
+
+<section class="page">
+    <header class="doc-header">
+        <span>4. Modelo operativo</span>
+        <img src="../public-web/assets/img/logo-header.png" alt="Ltecobike">
+    </header>
+    <h2>Modelo operativo</h2>
+    <p>El flujo de trabajo del negocio parte de la carga de productos e importaciones, continua con publicacion o gestion de stock, y finaliza en venta, comprobante, garantia y seguimiento postventa.</p>
+    <ol>
+        <li>Administracion registra importaciones, vehiculos, repuestos, costos y precios.</li>
+        <li>Los vehiculos pueden publicarse en web, destacarse y ordenarse desde el panel.</li>
+        <li>El vendedor crea clientes y ventas internas, seleccionando motos o repuestos disponibles.</li>
+        <li>El sistema genera comprobante, actualiza stock, registra garantia y programa services cuando corresponde.</li>
+        <li>Postventa mantiene historial tecnico, observaciones, services y repuestos usados.</li>
+        <li>Distribuidores operan stock propio asignado y pedidos de reposicion.</li>
+    </ol>
+    <div class="box">El sistema usa el producto como entidad base. Motos y repuestos comparten datos comerciales comunes y luego agregan informacion especifica en tablas propias.</div>
+</section>
+
+<section class="page">
+    <header class="doc-header">
+        <span>5. Modulos implementados</span>
+        <img src="../public-web/assets/img/logo-header.png" alt="Ltecobike">
+    </header>
+    <h2>Modulos implementados</h2>
+    <table>
+        <thead><tr><th>Modulo</th><th>Descripcion</th></tr></thead>
+        <tbody>
+            <tr><td>Dashboard</td><td>Resumen ejecutivo de ventas, stock y metricas principales.</td></tr>
+            <tr><td>Busqueda</td><td>Buscador global para vehiculos, clientes y ventas.</td></tr>
+            <tr><td>Vehiculos</td><td>Alta, edicion, imagenes, QR interno, importacion, precios, publicacion web y estados.</td></tr>
+            <tr><td>Repuestos</td><td>Catalogo, stock, precios y visibilidad operativa.</td></tr>
+            <tr><td>Clientes</td><td>Datos comerciales, fiscales y de contacto.</td></tr>
+            <tr><td>Ventas</td><td>Nueva venta, detalle, anulacion, comprobantes, WhatsApp y exportacion.</td></tr>
+            <tr><td>Postventa</td><td>Garantias, services, historial tecnico, observaciones y repuestos usados.</td></tr>
+            <tr><td>Gastos y balance</td><td>Registro de egresos y resumen financiero.</td></tr>
+            <tr><td>Importaciones</td><td>Numero de importacion y tipo de cambio asociado a stock.</td></tr>
+            <tr><td>Distribuidores</td><td>Stock asignado, pedidos, ventas, comisiones y estado de cuenta.</td></tr>
+            <tr><td>Usuarios</td><td>Roles, claves, activacion, MFA y permisos.</td></tr>
+            <tr><td>Auditoria</td><td>Trazabilidad de operaciones relevantes del sistema.</td></tr>
+        </tbody>
+    </table>
+</section>
+
+<section class="page">
+    <header class="doc-header">
+        <span>6. Roles y permisos</span>
+        <img src="../public-web/assets/img/logo-header.png" alt="Ltecobike">
+    </header>
+    <h2>Roles y permisos</h2>
+    <p>El sistema utiliza roles para separar responsabilidades operativas y limitar accesos segun el tipo de usuario.</p>
+    <div class="grid">
+        <div class="card"><strong>Superadmin</strong>Acceso completo, auditoria, usuarios, mantenimiento, configuracion y controles avanzados.</div>
+        <div class="card"><strong>Administrador</strong>Gestion operativa amplia: vehiculos, ventas, clientes, finanzas, importaciones y distribuidores.</div>
+        <div class="card"><strong>Vendedor</strong>Operacion comercial basica: ventas, busqueda, clientes, vehiculos y postventa segun permisos.</div>
+        <div class="card"><strong>Distribuidor</strong>Panel propio con stock asignado, pedidos, ventas y estado de cuenta.</div>
+    </div>
+    <p>La sesion se controla por inactividad, regeneracion de ID y cookies seguras. Los formularios sensibles usan CSRF y el login puede incorporar Turnstile y MFA.</p>
+</section>
+
+<section class="page">
+    <header class="doc-header">
+        <span>7. Ventas, comprobantes y verificacion</span>
+        <img src="../public-web/assets/img/logo-header.png" alt="Ltecobike">
+    </header>
+    <h2>Ventas, comprobantes y verificacion</h2>
+    <p>La venta interna registra cliente, productos, cantidades, moneda, metodo de pago, descuento, recargo, monto pagado, saldo y estado. Para motos, el sistema vincula el vehiculo vendido y habilita procesos de garantia y servicios.</p>
+    <h3>Comprobantes</h3>
+    <p>Los comprobantes se generan desde el panel y contienen un QR o enlace de verificacion. La validez se calcula mediante token HMAC, usando datos estables de la venta y el secreto <code>LTECO_COMPROBANTE_SECRET</code>.</p>
+    <h3>Logica compartida</h3>
+    <p>La generacion de numero, token y URL de verificacion fue centralizada en <code>shared/comprobante_verificacion.php</code>. Esto evita diferencias entre el comprobante emitido desde el panel y la verificacion publica.</p>
+    <div class="box">La verificacion publica se sirve desde <code>public-web/verificar-comprobante.php</code>, usa headers <code>noindex</code>/<code>no-store</code>, token HMAC y rate limit local configurable.</div>
+</section>
+
+<section class="page">
+    <header class="doc-header">
+        <span>8. Web publica y catalogo</span>
+        <img src="../public-web/assets/img/logo-header.png" alt="Ltecobike">
+    </header>
+    <h2>Web publica y catalogo</h2>
+    <p>La web publica muestra vehiculos publicados desde el panel. Toma datos de productos y vehiculos, respeta orden, destacado y estado, y permite derivar consultas a WhatsApp o formulario de contacto.</p>
+    <ul>
+        <li><code>index.php</code>: home publica.</li>
+        <li><code>catalogo.php</code>: listado de vehiculos publicados.</li>
+        <li><code>detalle.php</code>: ficha publica del modelo.</li>
+        <li><code>contacto.php</code>: consulta comercial.</li>
+        <li><code>verificar-comprobante.php</code>: verificacion publica de comprobantes.</li>
+    </ul>
+    <div class="figure">
+        <img src="assets/fotos-reales-catalogo-ltecobike.png" alt="Fotos reales del catalogo">
+        <div class="caption">Evidencia visual del catalogo y vehiculos publicados.</div>
+    </div>
+</section>
+
+<section class="page">
+    <header class="doc-header">
+        <span>9. Seguridad y auditoria</span>
+        <img src="../public-web/assets/img/logo-header.png" alt="Ltecobike">
+    </header>
+    <h2>Seguridad y auditoria</h2>
+    <p>El sistema incorpora controles de acceso y trazabilidad sobre las operaciones principales. La seguridad esta implementada en capas: configuracion HTTP, sesion, permisos por rol, CSRF, validacion de login, MFA y auditoria.</p>
+    <table>
+        <thead><tr><th>Control</th><th>Implementacion</th></tr></thead>
+        <tbody>
+            <tr><td>Sesiones</td><td>Cookies seguras, expiracion por inactividad y regeneracion periodica.</td></tr>
+            <tr><td>Login</td><td>Hash de contrasena, bloqueo por intentos, auditoria y Turnstile opcional.</td></tr>
+            <tr><td>MFA</td><td>Disponible para perfiles administrativos.</td></tr>
+            <tr><td>CSRF</td><td>Validacion en formularios sensibles.</td></tr>
+            <tr><td>Auditoria</td><td>Registro de usuario, rol, accion, modulo, detalle, IP, user agent y fecha.</td></tr>
+            <tr><td>Headers</td><td>CSP, HSTS cuando corresponde, X-Frame-Options, Referrer-Policy y Permissions-Policy.</td></tr>
+        </tbody>
+    </table>
+</section>
+
+<section class="page">
+    <header class="doc-header">
+        <span>10. Infraestructura y mantenimiento</span>
+        <img src="../public-web/assets/img/logo-header.png" alt="Ltecobike">
+    </header>
+    <h2>Infraestructura y mantenimiento</h2>
+    <p>El proyecto cuenta con despliegue Docker para panel y web publica, configuracion Apache separada y variables de entorno centralizadas. El archivo <code>.env</code> no debe versionarse y <code>.env.example</code> funciona como contrato de configuracion.</p>
+    <h3>Servicios</h3>
+    <ul>
+        <li><code>panel</code>: servicio Apache/PHP para <code>lteco-panel</code>.</li>
+        <li><code>web</code>: servicio Apache/PHP para <code>public-web</code>.</li>
+        <li>Base de datos MySQL/MariaDB externa o accesible por <code>host.docker.internal</code> en entorno local.</li>
+    </ul>
+    <h3>Backups</h3>
+    <p>El sistema incluye script <code>backup_db.sh</code> y modulo de mantenimiento desde panel. Los backups y logs locales deben permanecer fuera del repositorio versionado.</p>
+</section>
+
+<section class="page">
+    <header class="doc-header">
+        <span>11. Estado actual y pendientes</span>
+        <img src="../public-web/assets/img/logo-header.png" alt="Ltecobike">
+    </header>
+    <h2>Estado actual y pendientes</h2>
+    <p>El sistema se encuentra ordenado por capas principales y con limpieza reciente de archivos obsoletos, dependencias duplicadas y backups locales versionados por error.</p>
+    <h3>Estado confirmado</h3>
+    <ul>
+        <li>Scanner QR interno consolidado en el panel.</li>
+        <li>Dependencia <code>html5-qrcode</code> mantenida solo en assets del panel.</li>
+        <li>Logica de verificacion de comprobantes centralizada en <code>shared</code>.</li>
+        <li>Documentacion de ordenamiento y pendientes agregada en <code>docs</code>.</li>
+    </ul>
+    <h3>Pendientes controlados</h3>
+    <ul>
+        <li>Configurar rate limit adicional en Cloudflare si el dominio publico queda expuesto a alto trafico.</li>
+        <li>Mantener las rutas legacy <code>vehiculos/etiqueta.php</code> y <code>vehiculos/etiqueta_doble.php</code> como redirecciones.</li>
+        <li>Confirmar cualquier reescritura de URLs ya emitidas por QR, comprobantes o WhatsApp.</li>
+    </ul>
+    <div class="box">
+        Esta documentacion complementa los archivos tecnicos existentes: <code>DOCUMENTACION_OFICIAL_SISTEMA.md</code>, <code>MANUAL_DE_USUARIO.md</code>, <code>ORDENAMIENTO_ARCHIVOS.md</code> y <code>PENDIENTES.md</code>.
+    </div>
+</section>
+
+</body>
+</html>
